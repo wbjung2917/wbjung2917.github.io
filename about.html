@@ -1,17 +1,51 @@
 ---
 layout: about
-title: About
+title: About Me
 ---
-
-<h2>About</h2>
-
-<p>
-:art:&nbsp;Yet another theme for elegant writers with modern flat style
-and beautiful night mode.
-</p>
-
-<p>
-Hey, nice to meet you, you found this Jekyll theme. Here the yet another
-theme is a modern theme, and it's quite clear, clean and neat for writers
-and posts.
-</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        #profile{
+            display:flex;
+        }
+        #profile_paragraph{
+            margin: 20px;
+        }
+        #record_line{
+            display: flex;
+        }
+        #record_line > *{
+            margin : 20px;
+        }
+        #record_title{
+            font-weight:bold;
+        }
+    </style>
+</head>
+<body>
+    <h2>About Me</h2>
+    <div id="profile">
+        <img src="assets/images/banners/home.jpeg" width="150px" height="200px">
+        <div id="profile_paragraph">
+            <h2>Orca</h2>
+            <p>코딩은 기세다.</p>
+        </div>
+    </div>
+    
+    <h3>이력</h3>
+    <hr>
+    <div id="record_line">
+        <p id="record_title">서울시립대</p>
+        <p>2015.03.02~2021.02.22</p>
+    </div>
+    <hr>
+    
+    <p>
+    Hey, nice to meet you, you found this Jekyll theme. Here the yet another
+    theme is a modern theme, and it's quite clear, clean and neat for writers
+    and posts.
+    </p>    
+</body>
+</html>
