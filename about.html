@@ -7,45 +7,126 @@ title: About Me
 <head>
     <meta charset="UTF-8">
     <style>
+        hr{
+            margin: 0px;
+        }
+        
+        .about_me_item{
+            display: flex;
+            padding: 10px;
+            transition: 1s;
+            margin : 2px;
+            border-radius: 4px;
+        }
+        .about_me_item:hover{
+            background-color: lightgray;
+            color : black;
+            transition: 1s;
+        }
+        .about_me_item_title{
+            font-weight: bold;
+            margin : 0px 20px;
+        }
+        .about_me_item_describe{    
+            margin : 0px 20px;   
+        }
+
         #profile{
             display:flex;
-        }
-        #profile_paragraph{
+            align-items: center;
             margin: 20px;
         }
-        #record_line{
-            display: flex;
+        #profile_image{
+            width: 200px;
+            height: 200px;
+            margin: 0px;
         }
-        #record_line > *{
-            margin : 20px;
+        #profile_paragraph{
+            display:flex;
+            flex-direction: column;
+            justify-content: center;
+            margin: 20px 30px;
         }
-        #record_title{
-            font-weight:bold;
+        #profile_paragraph>*{
+            margin:5px;
+        }
+        #profile_name{
+            font-size : 40px;
+            font-weight: bold;
+        }
+        #profile_motto{
+            font-size : 20px;
+            font-style: italic;
+        }
+        #profile_describe{
+            margin-left : 10px;
         }
     </style>
 </head>
 <body>
     <h2>About Me</h2>
+    <hr>
     <div id="profile">
-        <img src="assets/images/banners/home.jpeg" width="150px" height="200px">
+        <img id="profile_image" src="assets/images/banners/Orca_Profile_Circular.png">
         <div id="profile_paragraph">
-            <h2>Orca</h2>
-            <p>코딩은 기세다.</p>
+            <p id="profile_name">Orca</p>
+            <p id="profile_motto">코딩은 기세다.</p>
+            <p id="profile_describe">
+                저는 Orca입니다. 이곳에 저에대한 소개를 간략하게 적어볼것 입니다.<br>
+                나도 모양을 이쁘게 써보고 싶습니다.<br>
+                관심있는 분야는 자연어처리입니다. 사람의 행위, 언어 등을 멋들어지게 처리해 보고 싶습니다.
+            </p>
         </div>
     </div>
-    
-    <h3>이력</h3>
     <hr>
-    <div id="record_line">
-        <p id="record_title">서울시립대</p>
-        <p>2015.03.02~2021.02.22</p>
+    <div>
+        <ul class="about_me_list">
+            <h3>Education</h3>
+            <hr>
+            <li class="about_me_item">
+                <span class="about_me_item_title">인천고등학교</span> 
+                <span class="about_me_item_describe">이과</span>
+                <span class="about_me_item_describe">2012.03.01~2015.02.28</span>
+            </li>
+            <li class="about_me_item">
+                <span class="about_me_item_title">서울시립대학교</span> 
+                <span class="about_me_item_describe">컴퓨터과학부</span>
+                <span class="about_me_item_describe">2015.03.02~2021.02.22</span>
+            </li>
+            <li class="about_me_item">
+                <span class="about_me_item_title">Alpaco</span> 
+                <span class="about_me_item_describe">AI기반 RPA 데이터 엔지니어 부트캠프(2기)</span>
+                <span class="about_me_item_describe">2022.06.16~2022.12.15(진행중)</span>
+            </li>
+        </ul>
+        <ul class="about_me_list">
+            <h3>Qualifications</h3>
+            <hr>
+            <li class="about_me_item">
+                <span class="about_me_item_title">정보처리기사</span> 
+                <span class="about_me_item_describe">최종합격</span>
+                <span class="about_me_item_describe">2021.06.02</span>
+            </li>
+            <li class="about_me_item">
+                <span class="about_me_item_title">TOEIC</span>
+                <span class="about_me_item_describe">925점</span>
+                <span class="about_me_item_describe">2022.02.06</span>
+            </li>
+            <li class="about_me_item">
+                <span class="about_me_item_title">한국사능력검정시험</span>
+                <span class="about_me_item_describe">1급</span>
+                <span class="about_me_item_describe">2022.02.25</span>
+            </li>
+        </ul>
+        <ul class="about_me_list">
+            <h3>Awards</h3>
+            <hr>
+            <li class="about_me_item">
+                <span class="about_me_item_title">[Dacon] 코로나 데이터 시각화 AI 경진대회</span> 
+                <span class="about_me_item_describe">종합6위</span>
+                <span class="about_me_item_describe">20220.03.299~2020.05.10</span>
+        </ul>
     </div>
     <hr>
-    
-    <p>
-    Hey, nice to meet you, you found this Jekyll theme. Here the yet another
-    theme is a modern theme, and it's quite clear, clean and neat for writers
-    and posts.
-    </p>    
 </body>
 </html>
