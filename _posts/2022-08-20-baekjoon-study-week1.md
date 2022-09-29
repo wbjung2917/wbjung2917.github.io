@@ -2,6 +2,7 @@
 layout: post
 title: 백준 단계별 문제풀이 스터디 1주차
 subtitle:
+author: 정우빈
 categories: Study
 tags: [python]
 ---
