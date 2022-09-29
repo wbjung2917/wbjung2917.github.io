@@ -2,7 +2,7 @@
 layout: post
 title: 백준 단계별 문제풀이 스터디 3주차
 subtitle:
-categories: 스터디
+categories: Study
 tags: [python]
 ---
 
