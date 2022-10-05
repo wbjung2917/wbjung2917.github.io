@@ -53,8 +53,6 @@ npm start 후 브라우저 주소창 : http://localhost:3000 or http://127.0.0.1
 
 html안에서 스크립트라는 키워드로 js, css등의 작업을 동시에 할 수 있다.(통합성)
 
-### JavaScript의 단점
-
 ### JavaScript 엔진의 종류
 
 크롬, 오페라 - V8  
@@ -156,15 +154,30 @@ const c=3;
 - Number(정수, 부동소수점, Infinity, NaN)
 - String(문자열)
 
-### JavaScript에서의 for문
+### JavaScript에서의 반복문
 ```javascript
+//for문
+let i=0,n=10;
 for(i=0;i<n;i++){
     console.log(i);
 }
+//while문
+i=0;
+while(i<n){
+    console.log(`${i++}번째 항목입니다.`);
+}
+//do while문
+i=0;
+do{    
+    console.log(i++);
+}
+while(i<n)
 ```
 
-### JavaScript에서의 if문
+### JavaScript에서의 조건문
 ```javascript
+let a=3;
+//if문
 if(a>0){
     console.log("Positive");
 } 
@@ -173,6 +186,20 @@ else if(a<0){
 }
 else{
     console.log("Zero");
+}
+
+//switch문
+switch(a){   
+    case 0:
+        console.log(`is ${a}`) 
+    case 1:
+        console.log(`is ${a}`) 
+    case 2:
+        console.log(`is ${a}`) 
+    case 3:
+        console.log(`is ${a}`) 
+    default:
+        console.log("default")
 }
 ```
 
@@ -192,6 +219,17 @@ else{
 //선언없이 할당을 했으므로 에러가 남
 //원래는 암묵적으로 이해해주지만 use strict가 에러를 유발
 x=3.14;
+```
+
+### JavaScript에서의 alert, prompt, confirm
+```javascript
+alert("This is alert!")
+let inputValue=prompt();
+console.log(inputValue);//입력받은값
+console.log(typeof inputValue);//string
+let confirmValue=confirm();
+console.log(confirmValue);//True or False
+console.log(typeof confirmValue);//boolean
 ```
 
 [1]:https://www.howdy-mj.me/javascript/var-let-const/
