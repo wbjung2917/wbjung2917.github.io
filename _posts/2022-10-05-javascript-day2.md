@@ -251,6 +251,7 @@ console.log(true||false);//True
       console.log(xnor(1,0)); //0
       console.log(xnor(0,1)); //0
       console.log(xnor(1,1)); //1
+      console.log(hello world!);
     </script>
   </body>
 </html>
