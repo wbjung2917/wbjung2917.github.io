@@ -10,13 +10,19 @@ title: About Me
         hr{
             margin: 0px;
         }
+        table tr:nth-child(even){
+            background-color: transparent;
+        }
+        table td{
+            border: none;
+        }
         
+        .about_me_table{
+            width : 100%;
+            background-color: transparent;
+        }
         .about_me_item{
-            display: flex;
-            padding: 10px;
             transition: 1s;
-            margin : 2px;
-            border-radius: 4px;
         }
         .about_me_item:hover{
             background-color: lightgray;
@@ -25,10 +31,10 @@ title: About Me
         }
         .about_me_item_title{
             font-weight: bold;
-            margin : 0px 20px;
+            width:20%;
         }
-        .about_me_item_describe{    
-            margin : 0px 20px;   
+        .about_me_item_describe{
+            width: 40%;
         }
 
         #profile{
@@ -37,8 +43,8 @@ title: About Me
             margin: 20px;
         }
         #profile_image{
-            width: 200px;
-            height: 200px;
+            width: 40%;
+            height: auto;
             margin: 0px;
         }
         #profile_paragraph{
@@ -61,6 +67,13 @@ title: About Me
         #profile_describe{
             margin-left : 10px;
         }
+        #contents{
+            display:flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width : 100%;
+        }
     </style>
 </head>
 <body>
@@ -79,53 +92,54 @@ title: About Me
         </div>
     </div>
     <hr>
-    <div>
-        <ul class="about_me_list">
-            <h3>Education</h3>
-            <hr>
-            <li class="about_me_item">
-                <span class="about_me_item_title">인천고등학교</span> 
-                <span class="about_me_item_describe">이과</span>
-                <span class="about_me_item_describe">2012.03.01~2015.02.28</span>
-            </li>
-            <li class="about_me_item">
-                <span class="about_me_item_title">서울시립대학교</span> 
-                <span class="about_me_item_describe">컴퓨터과학부</span>
-                <span class="about_me_item_describe">2015.03.02~2021.02.22</span>
-            </li>
-            <li class="about_me_item">
-                <span class="about_me_item_title">Alpaco</span> 
-                <span class="about_me_item_describe">AI기반 RPA 데이터 엔지니어 부트캠프(2기)</span>
-                <span class="about_me_item_describe">2022.06.16~2022.12.15(진행중)</span>
-            </li>
-        </ul>
-        <ul class="about_me_list">
-            <h3>Qualifications</h3>
-            <hr>
-            <li class="about_me_item">
-                <span class="about_me_item_title">정보처리기사</span> 
-                <span class="about_me_item_describe">최종합격</span>
-                <span class="about_me_item_describe">2021.06.02</span>
-            </li>
-            <li class="about_me_item">
-                <span class="about_me_item_title">TOEIC</span>
-                <span class="about_me_item_describe">925점</span>
-                <span class="about_me_item_describe">2022.02.06</span>
-            </li>
-            <li class="about_me_item">
-                <span class="about_me_item_title">한국사능력검정시험</span>
-                <span class="about_me_item_describe">1급</span>
-                <span class="about_me_item_describe">2022.02.25</span>
-            </li>
-        </ul>
-        <ul class="about_me_list">
-            <h3>Awards</h3>
-            <hr>
-            <li class="about_me_item">
-                <span class="about_me_item_title">[Dacon] 코로나 데이터 시각화 AI 경진대회</span> 
-                <span class="about_me_item_describe">종합6위</span>
-                <span class="about_me_item_describe">20220.03.299~2020.05.10</span>
-        </ul>
+    <div id="contents">
+        <h3>Education</h3>
+        <hr>
+        <table class="about_me_table"> 
+            <tr class="about_me_item">
+                <td class="about_me_item_title">인천고등학교</td> 
+                <td class="about_me_item_describe">이과</td>
+                <td class="about_me_item_describe">2012.03.01~2015.02.28</td>
+            </tr>
+            <tr class="about_me_item">
+                <td class="about_me_item_title">서울시립대학교</td> 
+                <td class="about_me_item_describe">컴퓨터과학부</td>
+                <td class="about_me_item_describe">2015.03.02~2021.02.22</td>
+            </tr>
+            <tr class="about_me_item">
+                <td class="about_me_item_title">Alpaco</td> 
+                <td class="about_me_item_describe">AI기반 RPA 데이터 엔지니어 부트캠프(2기)</td>
+                <td class="about_me_item_describe">2022.06.16~2022.12.15(진행중)</td>
+            </tr>
+        </table>
+        
+        <h3>Qualifications</h3>
+        <hr>
+        <table class="about_me_table">
+            <tr class="about_me_item">
+                <td class="about_me_item_title">정보처리기사</td> 
+                <td class="about_me_item_describe">최종합격</td>
+                <td class="about_me_item_describe">2021.06.02</td>
+            </tr>
+            <tr class="about_me_item">
+                <td class="about_me_item_title">TOEIC</td>
+                <td class="about_me_item_describe">925점</td>
+                <td class="about_me_item_describe">2022.02.06</td>
+            </tr>
+            <tr class="about_me_item">
+                <td class="about_me_item_title">한국사능력검정시험</td>
+                <td class="about_me_item_describe">1급</td>
+                <td class="about_me_item_describe">2022.02.25</td>
+            </tr>
+        </table>
+        <h3>Awards</h3>
+        <hr>
+        <table class="about_me_table">
+            <tr class="about_me_item">
+                <td class="about_me_item_title">[Dacon] 코로나 데이터 시각화 AI 경진대회</td> 
+                <td class="about_me_item_describe">종합6위</td>
+                <td class="about_me_item_describe">2020.03.29~2020.05.10</td>
+        </table>
     </div>
     <hr>
 </body>
