@@ -1,0 +1,89 @@
+---
+layout: about
+title: OH MY LUNCH
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/OML_Style.css">
+    <title>Oh My Lunch</title>
+</head>
+<body>    
+    <script type="text/javascript">
+        function addList(){
+            var Menu_Name=document.getElementById("Menu_Input");
+            var menuInputValue=Menu_Name.value;
+            if (menuInputValue!="")
+            {
+                var Menu_List=document.getElementById("Menu_List");
+
+                //메뉴 요소 설정
+                var Menu_Element=document.createElement("div");
+                Menu_Element.id="menu_element";
+                var Menu_Text=document.createElement("span");
+                Menu_Text.id="menu_text";
+                Menu_Text.innerText=Menu_Name.value;
+                Menu_Element.appendChild(Menu_Text);
+
+                //버튼만들기
+                var Delete_Buttton=document.createElement("button");
+                var Button_Img=document.createElement("img");
+                Button_Img.src="assets/images/delete.png";
+                Button_Img.id="delete_img";
+                Delete_Buttton.appendChild(Button_Img);
+                Delete_Buttton.id="delete_button"
+                Delete_Buttton.onclick=function removeList(){
+                    Delete_Buttton.parentNode.parentNode.removeChild(this.parentNode);               
+                }
+                //메뉴요소에 버튼추가
+                Menu_Element.appendChild(Delete_Buttton);
+
+                //메뉴리스트에 메뉴요소 추가
+                Menu_List.appendChild(Menu_Element);
+
+                Menu_Name.value="";
+            }  
+            else
+            {
+                window.alert("메뉴이름을 입력하지 않았습니다.");
+            }
+        }
+        function lunchChoice() {
+            var Menu_List=document.getElementById("Menu_List").children;
+            if (Menu_List.length==0)
+            {
+                window.alert("메뉴를 하나도 입력하지 않았습니다.")
+            } 
+            else 
+            {
+                var index=Math.floor(Math.random()*Menu_List.length);
+                var Today_Menu=document.getElementById("today_menu_box");
+                Today_Menu.innerText=Menu_List.item(index).innerText;
+            };
+        }
+    </script>
+    <h1>Oh My Lunch</h1>
+    <div id="contents">
+        <div id="version">
+            v.1.0.1
+        </div>
+        <div class="Input_Line">
+            <input type="text" id="Menu_Input">
+            <button id="Add_Menu_Btn" class="buttons" onclick="addList()">Add Menu</button>
+        </div>
+        <div class="Menu_Line">
+            <div id="Menu_List">
+            </div>
+            <button id="Choice_Lunch_Btn" class="buttons" onclick="lunchChoice()">Choice Lunch</button>
+        </div>
+        <div id="menu_box_title">
+            오늘의 메뉴는...
+        </div>
+        <div id="today_menu_box">
+    </div>
+</body>
+</html>

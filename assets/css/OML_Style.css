@@ -1,0 +1,134 @@
+body {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+input{
+    width : 50%;
+    height : 150px;
+}
+p{
+    text-align: center;
+}
+h1 {
+    text-align: center;
+    font-size: 80px;
+    color: #0B2B1D;
+    margin : 20px;
+}
+footer{
+    width: 100%;
+}
+
+.Input_Line{    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.Input_Line > *{
+    height : 80px;
+    text-align: center;
+    font-size : 50px;
+    margin : 10px;
+}
+.Menu_Line{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width : 100%;
+}
+.buttons{
+    background-color: #D6FFE7;
+    color: #0B2B1D;
+    border:#39DB85 3px solid;
+    border-radius: 4px;
+    transition: 0.5s;
+}
+.buttons:hover{
+    background-color: #39DB85;
+    color: #0B2B1D;
+    border:#39DB85 3px solid;
+    border-radius: 4px;
+    transition: 0.5s;
+}
+
+#Menu_Input{
+    background-color: white;
+    color: #0B2B1D;
+    border:#39DB85 3px solid;
+    border-radius: 4px;
+}
+#Add_Menu_Btn {
+    width : 30%;
+    height : 90px;
+}
+#Choice_Lunch_Btn{
+    width : 83%;
+    height : 90px;
+    font-size: 50px;
+}
+#delete_button{
+    background-color: transparent;
+    border-style: none;
+}
+#delete_img{
+    width:auto;
+    height:40px;
+}
+#menu_box_title{
+    text-align: center;
+    width: 83%;
+    font-size: 50px;
+    margin: 40px 20px 10px 20px;
+    font-weight: bold;
+    color : #0B2B1D;
+}
+#today_menu_box{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #39DB85;
+    font-size: 70px;
+    color : #0B2B1D;
+    border: #0B2B1D solid 5px;
+    border-radius: 4px;
+    margin : 0;
+    width: 83%;
+    height: 150px;
+}
+#Menu_List{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width:100%;
+}
+#menu_element{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    height: 40px;
+    margin : 10px;
+    padding : 10px;
+    background-color: #39DB85;
+    border-radius: 4px;
+}
+#menu_text{
+    font-size: 30px;
+    text-align: center;
+    width:70%;
+}
+#version {
+    width: 83%;
+    text-align: right;
+    font-weight: bold;
+    color:#0B2B1D;
+}
+#contents {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
