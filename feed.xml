@@ -1,0 +1,1408 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="http://localhost:4000/jekyll-theme-yat/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/jekyll-theme-yat/" rel="alternate" type="text/html" /><updated>2024-11-16T16:18:02+00:00</updated><id>http://localhost:4000/jekyll-theme-yat/feed.xml</id><title type="html">정우빈의 코드창고</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><author><name>Orca</name></author><entry><title type="html">백준 단계별 문제풀이 스터디 6주차</title><link href="http://localhost:4000/jekyll-theme-yat/study/2024/08/10/baekjoon-study-week6.html" rel="alternate" type="text/html" title="백준 단계별 문제풀이 스터디 6주차" /><published>2024-08-10T00:00:00+00:00</published><updated>2024-08-10T00:00:00+00:00</updated><id>http://localhost:4000/jekyll-theme-yat/study/2024/08/10/baekjoon-study-week6</id><content type="html" xml:base="http://localhost:4000/jekyll-theme-yat/study/2024/08/10/baekjoon-study-week6.html"><![CDATA[<h2 id="10828번-스택">10828번 스택</h2>
+
+<h3 id="링크">링크</h3>
+<p><a href="https://www.acmicpc.net/problem/10828">https://www.acmicpc.net/problem/10828</a></p>
+
+<h3 id="문제">문제</h3>
+<p>정수를 저장하는 스택을 구현한 다음, 입력으로 주어지는 명령을 처리하는 프로그램을 작성하시오.</p>
+
+<p>명령은 총 다섯 가지이다.</p>
+
+<p>push X: 정수 X를 스택에 넣는 연산이다.<br />
+pop: 스택에서 가장 위에 있는 정수를 빼고, 그 수를 출력한다. 만약 스택에 들어있는 정수가 없는 경우에는 -1을 출력한다.<br />
+size: 스택에 들어있는 정수의 개수를 출력한다.<br />
+empty: 스택이 비어있으면 1, 아니면 0을 출력한다.<br />
+top: 스택의 가장 위에 있는 정수를 출력한다. 만약 스택에 들어있는 정수가 없는 경우에는 -1을 출력한다.</p>
+
+<h3 id="입력">입력</h3>
+<p>첫째 줄에 주어지는 명령의 수 N (1 ≤ N ≤ 10,000)이 주어진다. 둘째 줄부터 N개의 줄에는 명령이 하나씩 주어진다. 주어지는 정수는 1보다 크거나 같고, 100,000보다 작거나 같다. 문제에 나와있지 않은 명령이 주어지는 경우는 없다.</p>
+
+<h3 id="출력">출력</h3>
+<p>출력해야하는 명령이 주어질 때마다, 한 줄에 하나씩 출력한다.</p>
+<h3 id="코드">코드</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#list를 활용한 구현
+</span><span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="k">class</span> <span class="nc">Stack</span><span class="p">:</span>
+
+  <span class="c1">#Stack 생성시 초기화 stack_values에 빈리스트를 할당
+</span>  <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="bp">self</span><span class="p">.</span><span class="n">stack_values</span> <span class="o">=</span> <span class="p">[]</span>
+
+  <span class="c1">#stack_values에 item을 append
+</span>  <span class="k">def</span> <span class="nf">push</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">item</span><span class="p">):</span>
+    <span class="bp">self</span><span class="p">.</span><span class="n">stack_values</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+
+  <span class="c1">#stack_values의 맨 끝 항목을 리턴하고 삭제 
+</span>  <span class="k">def</span> <span class="nf">pop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">stack_values</span><span class="p">:</span>
+      <span class="n">pop_value</span><span class="o">=</span><span class="bp">self</span><span class="p">.</span><span class="n">stack_values</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+      <span class="k">del</span> <span class="bp">self</span><span class="p">.</span><span class="n">stack_values</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+      <span class="k">return</span> <span class="n">pop_value</span>
+      <span class="c1">#return self.stack_values.pop() 팝으로 구현하는법
+</span>
+    <span class="c1">#만약 stack_values가 빈리스트이면 -1리턴
+</span>    <span class="k">else</span><span class="p">:</span>
+      <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+
+  <span class="c1">#stack_values의 길이를 출력
+</span>  <span class="k">def</span> <span class="nf">size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">stack_values</span><span class="p">)</span>
+
+  <span class="c1">#stack_values가 비었으면 1 아니면 0
+</span>  <span class="k">def</span> <span class="nf">empty</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">stack_values</span><span class="p">:</span>
+      <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="k">return</span> <span class="mi">1</span>
+
+  <span class="c1">#stack_values의 맨 뒤 요소를 리턴
+</span>  <span class="k">def</span> <span class="nf">top</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">stack_values</span><span class="p">:</span>
+      <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">stack_values</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="c1">#만약 stack_values가 비었으면 -1리턴
+</span>    <span class="k">else</span><span class="p">:</span>
+      <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+
+<span class="c1">#명령 갯수를 입력받는다.
+</span><span class="n">NumberOfLines</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">stdin</span><span class="p">.</span><span class="n">readline</span><span class="p">())</span>
+<span class="c1">#스택을 하나 만든다.
+</span><span class="n">My_Stack</span><span class="o">=</span><span class="n">Stack</span><span class="p">()</span>
+<span class="c1">#명령 갯수만큼 반복하며 명령을 실행한다.
+</span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">NumberOfLines</span><span class="p">):</span>
+  <span class="c1">#명령을 공백으로 split
+</span>  <span class="n">command</span><span class="o">=</span><span class="n">sys</span><span class="p">.</span><span class="n">stdin</span><span class="p">.</span><span class="n">readline</span><span class="p">().</span><span class="n">strip</span><span class="p">().</span><span class="n">split</span><span class="p">(</span><span class="s">" "</span><span class="p">)</span>
+  <span class="c1">#명령이 push일때 명령의 숫자를 push
+</span>  <span class="k">if</span> <span class="n">command</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="s">"push"</span><span class="p">:</span>
+    <span class="n">My_Stack</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">command</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+  <span class="c1">#명령이 pop일때 pop
+</span>  <span class="k">elif</span> <span class="n">command</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="s">"pop"</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">My_Stack</span><span class="p">.</span><span class="n">pop</span><span class="p">())</span>
+  <span class="c1">#명령이 size일때 size
+</span>  <span class="k">elif</span> <span class="n">command</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="s">"size"</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">My_Stack</span><span class="p">.</span><span class="n">size</span><span class="p">())</span>
+  <span class="c1">#명령이 empty일때 empty
+</span>  <span class="k">elif</span> <span class="n">command</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="s">"empty"</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">My_Stack</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span>
+  <span class="c1">#명령이 top일때 top
+</span>  <span class="k">elif</span> <span class="n">command</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="s">"top"</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">My_Stack</span><span class="p">.</span><span class="n">top</span><span class="p">())</span>
+</code></pre></div></div>
+
+<h2 id="18258번-큐-2">18258번 큐 2</h2>
+
+<h3 id="링크-1">링크</h3>
+<p><a href="https://www.acmicpc.net/problem/18258">https://www.acmicpc.net/problem/18258</a></p>
+
+<h3 id="문제-1">문제</h3>
+<p>정수를 저장하는 큐를 구현한 다음, 입력으로 주어지는 명령을 처리하는 프로그램을 작성하시오.</p>
+
+<p>명령은 총 여섯 가지이다.</p>
+
+<p>push X: 정수 X를 큐에 넣는 연산이다.<br />
+pop: 큐에서 가장 앞에 있는 정수를 빼고, 그 수를 출력한다. 만약 큐에 들어있는 정수가 없는 경우에는 -1을 출력한다.<br />
+size: 큐에 들어있는 정수의 개수를 출력한다.<br />
+empty: 큐가 비어있으면 1, 아니면 0을 출력한다.<br />
+front: 큐의 가장 앞에 있는 정수를 출력한다. 만약 큐에 들어있는 정수가 없는 경우에는 -1을 출력한다.<br />
+back: 큐의 가장 뒤에 있는 정수를 출력한다. 만약 큐에 들어있는 정수가 없는 경우에는 -1을 출력한다.</p>
+
+<h3 id="입력-1">입력</h3>
+<p>첫째 줄에 주어지는 명령의 수 N (1 ≤ N ≤ 2,000,000)이 주어진다. 둘째 줄부터 N개의 줄에는 명령이 하나씩 주어진다. 주어지는 정수는 1보다 크거나 같고, 100,000보다 작거나 같다. 문제에 나와있지 않은 명령이 주어지는 경우는 없다.</p>
+
+<h3 id="출력-1">출력</h3>
+<p>출력해야하는 명령이 주어질 때마다, 한 줄에 하나씩 출력한다.</p>
+<h3 id="코드1">코드1</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#linked_list를 사용해 구현하는 방법
+</span><span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="c1">#Node를 구현한다.
+</span><span class="k">class</span> <span class="nc">Node</span><span class="p">:</span>
+  <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">data</span><span class="p">):</span>
+    <span class="c1">#data를 저장할 공간
+</span>    <span class="bp">self</span><span class="p">.</span><span class="n">data</span><span class="o">=</span><span class="n">data</span>
+    <span class="c1">#다음노드를 가리킬 공간
+</span>    <span class="bp">self</span><span class="p">.</span><span class="nb">next</span><span class="o">=</span><span class="bp">None</span>
+
+<span class="c1">#Queue를 구현한다.
+</span><span class="k">class</span> <span class="nc">Queue</span><span class="p">:</span>
+  <span class="c1">#Queue초기화
+</span>  <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="c1">#맨 앞 요소를 가리키는 포인터
+</span>    <span class="bp">self</span><span class="p">.</span><span class="n">head</span><span class="o">=</span><span class="bp">None</span>
+    <span class="c1">#맨 뒤 요소를 가리키는 포인터
+</span>    <span class="bp">self</span><span class="p">.</span><span class="n">tail</span><span class="o">=</span><span class="bp">None</span>
+    <span class="c1">#linked_list의 길이를 나타내는 변수
+</span>    <span class="bp">self</span><span class="p">.</span><span class="n">length</span><span class="o">=</span><span class="mi">0</span>
+
+  <span class="c1">#push
+</span>  <span class="k">def</span> <span class="nf">push</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">item</span><span class="p">):</span>
+    <span class="c1">#기존 길이가 0개일 때
+</span>    <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">length</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+      <span class="c1">#새 노드를 생성
+</span>      <span class="n">new_node</span><span class="o">=</span><span class="n">Node</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+      <span class="c1"># head랑 tail을 모두 새 노드를 가리키게 한다.
+</span>      <span class="bp">self</span><span class="p">.</span><span class="n">head</span><span class="o">=</span><span class="n">new_node</span>
+      <span class="bp">self</span><span class="p">.</span><span class="n">tail</span><span class="o">=</span><span class="n">new_node</span>
+      <span class="c1"># length를 1늘인다.
+</span>      <span class="bp">self</span><span class="p">.</span><span class="n">length</span><span class="o">+=</span><span class="mi">1</span>
+    <span class="c1">#기존 길이가 0개보다 클때(작을때는 없으므로)
+</span>    <span class="k">else</span><span class="p">:</span>
+      <span class="c1">#새 노드를 생성
+</span>      <span class="n">new_node</span><span class="o">=</span><span class="n">Node</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+      <span class="c1">#tail이 가리키는 노드의 next에 새노드를 저장
+</span>      <span class="bp">self</span><span class="p">.</span><span class="n">tail</span><span class="p">.</span><span class="nb">next</span><span class="o">=</span><span class="n">new_node</span>
+      <span class="c1">#tail이 가리키는 노드를 새 노드로 바꿈
+</span>      <span class="bp">self</span><span class="p">.</span><span class="n">tail</span><span class="o">=</span><span class="n">new_node</span>
+      <span class="c1"># length를 1늘인다.
+</span>      <span class="bp">self</span><span class="p">.</span><span class="n">length</span><span class="o">+=</span><span class="mi">1</span>
+
+  <span class="c1">#pop
+</span>  <span class="k">def</span> <span class="nf">pop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="c1">#길이가 0일때는 -1을 리턴
+</span>    <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">length</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+      <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="c1">#길이가 존재하면
+</span>    <span class="k">else</span><span class="p">:</span>
+      <span class="c1">#pop_value에 맨앞의 값을 저장
+</span>      <span class="n">pop_value</span><span class="o">=</span><span class="bp">self</span><span class="p">.</span><span class="n">head</span><span class="p">.</span><span class="n">data</span>
+      <span class="c1">#head가 가리키는 노드를 head의 next노드로 변경
+</span>      <span class="bp">self</span><span class="p">.</span><span class="n">head</span><span class="o">=</span><span class="bp">self</span><span class="p">.</span><span class="n">head</span><span class="p">.</span><span class="nb">next</span>
+      <span class="c1">#없앤 head가 마지막 요소였을때 tail도 None으로 변경
+</span>      <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">head</span><span class="o">==</span><span class="bp">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">tail</span><span class="o">=</span><span class="bp">None</span>
+      <span class="c1">#length를 1줄인다.
+</span>      <span class="bp">self</span><span class="p">.</span><span class="n">length</span><span class="o">-=</span><span class="mi">1</span>
+      <span class="c1">#아까 저장해둔 pop_value를 리턴
+</span>      <span class="k">return</span> <span class="n">pop_value</span>
+
+  <span class="c1">#size 
+</span>  <span class="k">def</span> <span class="nf">size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="c1">#length를 리턴
+</span>    <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">length</span>
+
+  <span class="c1">#empty
+</span>  <span class="k">def</span> <span class="nf">empty</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="c1">#큐가 비었으면 1 아니면 0
+</span>    <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">head</span><span class="o">==</span><span class="bp">None</span><span class="p">:</span>
+      <span class="k">return</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="k">return</span> <span class="mi">0</span>
+
+  <span class="c1">#front
+</span>  <span class="k">def</span> <span class="nf">front</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="c1">#큐가 비었으면 -1  리턴 아니면 head의 data 리턴
+</span>    <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">head</span><span class="o">==</span><span class="bp">None</span><span class="p">:</span>
+      <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">head</span><span class="p">.</span><span class="n">data</span>
+
+  <span class="c1">#back
+</span>  <span class="k">def</span> <span class="nf">back</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="c1">#큐가 비었으면 -1  리턴 아니면 tail의 data  리턴
+</span>    <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">head</span><span class="o">==</span><span class="bp">None</span><span class="p">:</span>
+      <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">tail</span><span class="p">.</span><span class="n">data</span>
+
+<span class="c1">#명령의 갯수 저장
+</span><span class="n">NumberOfLines</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">stdin</span><span class="p">.</span><span class="n">readline</span><span class="p">())</span>
+<span class="c1">#큐 생성
+</span><span class="n">My_Queue</span><span class="o">=</span><span class="n">Queue</span><span class="p">()</span>
+<span class="c1">#명령의 갯수만큼 반복
+</span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">NumberOfLines</span><span class="p">):</span>
+  <span class="c1">#명령을 공백으로 split
+</span>  <span class="n">command</span><span class="o">=</span><span class="n">sys</span><span class="p">.</span><span class="n">stdin</span><span class="p">.</span><span class="n">readline</span><span class="p">().</span><span class="n">strip</span><span class="p">().</span><span class="n">split</span><span class="p">(</span><span class="s">" "</span><span class="p">)</span>
+  <span class="c1">#명령이 push일때 명령의 숫자를 push
+</span>  <span class="k">if</span> <span class="n">command</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="s">"push"</span><span class="p">:</span>
+    <span class="n">My_Queue</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">command</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+  <span class="c1">#명령이 pop일때 pop
+</span>  <span class="k">elif</span> <span class="n">command</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="s">"pop"</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">My_Queue</span><span class="p">.</span><span class="n">pop</span><span class="p">())</span>
+  <span class="c1">#명령이 size일때 size
+</span>  <span class="k">elif</span> <span class="n">command</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="s">"size"</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">My_Queue</span><span class="p">.</span><span class="n">size</span><span class="p">())</span>
+  <span class="c1">#명령이 empty일때 empty
+</span>  <span class="k">elif</span> <span class="n">command</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="s">"empty"</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">My_Queue</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span>
+  <span class="c1">#명령이 front일때 front
+</span>  <span class="k">elif</span> <span class="n">command</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="s">"front"</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">My_Queue</span><span class="p">.</span><span class="n">front</span><span class="p">())</span>
+  <span class="c1">#명령이 back일때 back
+</span>  <span class="k">elif</span> <span class="n">command</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="s">"back"</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">My_Queue</span><span class="p">.</span><span class="n">back</span><span class="p">())</span>
+</code></pre></div></div>
+
+<h3 id="코드2">코드2</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#deque를 사용해 구현하는 방법
+</span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="c1">#Queue를 구현
+</span><span class="k">class</span> <span class="nc">Queue</span><span class="p">:</span>
+  <span class="c1">#Queue초기화
+</span>  <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="c1">#deque객체인 queue_list를 생성
+</span>    <span class="bp">self</span><span class="p">.</span><span class="n">queue_list</span><span class="o">=</span><span class="n">deque</span><span class="p">()</span>
+
+  <span class="c1">#push
+</span>  <span class="k">def</span> <span class="nf">push</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">item</span><span class="p">):</span>
+    <span class="c1">#queue_list에 item을 append
+</span>    <span class="bp">self</span><span class="p">.</span><span class="n">queue_list</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+
+  <span class="c1">#pop
+</span>  <span class="k">def</span> <span class="nf">pop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="c1">#queue_list가 비어있지 않다면 popleft()로 맨 앞 요소를 제거하며 리턴
+</span>    <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">queue_list</span><span class="p">:</span>
+      <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">queue_list</span><span class="p">.</span><span class="n">popleft</span><span class="p">()</span>
+    <span class="c1">#queue_list가 비어있다면 -1을 리턴
+</span>    <span class="k">else</span><span class="p">:</span>
+      <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+
+  <span class="c1">#size
+</span>  <span class="k">def</span> <span class="nf">size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="c1">#queue_list의 길이를 리턴
+</span>    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">queue_list</span><span class="p">)</span>
+
+  <span class="c1">#empty
+</span>  <span class="k">def</span> <span class="nf">empty</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="c1">#queue_list가 비어있지 않다면 0 리턴
+</span>    <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">queue_list</span><span class="p">:</span>
+      <span class="k">return</span> <span class="mi">0</span>
+    <span class="c1">#queue_list가 비어있다면 1 리턴
+</span>    <span class="k">else</span><span class="p">:</span>
+      <span class="k">return</span> <span class="mi">1</span>
+
+  <span class="c1">#front
+</span>  <span class="k">def</span> <span class="nf">front</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="c1">#queue_list가 비어있지 않다면 맨앞의 요소를 리턴
+</span>    <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">queue_list</span><span class="p">:</span>
+      <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">queue_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="c1">#queue_list가 비어있다면 -1 리턴
+</span>    <span class="k">else</span><span class="p">:</span>
+      <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+
+  <span class="c1">#back
+</span>  <span class="k">def</span> <span class="nf">back</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="c1">#queue_list가 비어있지 않다면 맨 뒤의 요소를 리턴
+</span>    <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">queue_list</span><span class="p">:</span>
+      <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">queue_list</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="c1">#queue_list가 비어있다면 -1 리턴
+</span>    <span class="k">else</span><span class="p">:</span>
+      <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+
+<span class="c1">#명령의 갯수 저장
+</span><span class="n">NumberOfLines</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">stdin</span><span class="p">.</span><span class="n">readline</span><span class="p">())</span>
+<span class="c1">#큐 생성
+</span><span class="n">My_Queue</span><span class="o">=</span><span class="n">Queue</span><span class="p">()</span>
+<span class="c1">#명령의 갯수만큼 반복
+</span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">NumberOfLines</span><span class="p">):</span>
+  <span class="c1">#명령을 공백으로 split
+</span>  <span class="n">command</span><span class="o">=</span><span class="n">sys</span><span class="p">.</span><span class="n">stdin</span><span class="p">.</span><span class="n">readline</span><span class="p">().</span><span class="n">strip</span><span class="p">().</span><span class="n">split</span><span class="p">(</span><span class="s">" "</span><span class="p">)</span>
+  <span class="c1">#명령이 push일때 명령의 숫자를 push
+</span>  <span class="k">if</span> <span class="n">command</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="s">"push"</span><span class="p">:</span>
+    <span class="n">My_Queue</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">command</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+  <span class="c1">#명령이 pop일때 pop
+</span>  <span class="k">elif</span> <span class="n">command</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="s">"pop"</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">My_Queue</span><span class="p">.</span><span class="n">pop</span><span class="p">())</span>
+  <span class="c1">#명령이 size일때 size
+</span>  <span class="k">elif</span> <span class="n">command</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="s">"size"</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">My_Queue</span><span class="p">.</span><span class="n">size</span><span class="p">())</span>
+  <span class="c1">#명령이 empty일때 empty
+</span>  <span class="k">elif</span> <span class="n">command</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="s">"empty"</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">My_Queue</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span>
+  <span class="c1">#명령이 front일때 front
+</span>  <span class="k">elif</span> <span class="n">command</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="s">"front"</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">My_Queue</span><span class="p">.</span><span class="n">front</span><span class="p">())</span>
+  <span class="c1">#명령이 back일때 back
+</span>  <span class="k">elif</span> <span class="n">command</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="s">"back"</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">My_Queue</span><span class="p">.</span><span class="n">back</span><span class="p">())</span>
+</code></pre></div></div>
+
+<h2 id="당면한-문제">당면한 문제</h2>
+<h3 id="시간초과">시간초과</h3>
+<h4 id="input-vs-sysstdinreadline">input() vs sys.stdin.readline()</h4>
+<ul>
+  <li>
+    <p><strong>input()</strong><br />
+input()은 prompt에 문자열을 화면에 출력한다.<br />
+input()은 하나씩 누를 때마다 대응하는 데이터가 버퍼에 쌓인다.<br />
+입력 우측에 붙는 개행 문자를 제거한다.</p>
+  </li>
+  <li>
+    <p><strong>sys.stdin.readline()</strong><br />
+sys.stdin.readline()은 prompt에 출력하지 않는다.<br />
+sys.stdin.readline()은 입력을 한번에 읽어 한번에 버퍼로 집어넣는다.<br />
+입력 우측에 붙는 개행 문자가 포함된다. 그래서 strip()이나 rstrip()과 함께 쓰인다.</p>
+  </li>
+</ul>
+
+<h4 id="list와-linked-list-deque">list와 linked list, deque</h4>
+<p>list는 맨 앞 요소의 pop연산 실행 시 맨 앞 요소를 지우고 나머지 요소를 앞으로 한 칸씩 이동하는 과정을 거친다. 때문에 시간복잡도가 $ O(n) $이다.<br />
+반면 linked list와 deque는 head가 가리키는 노드만 한칸 옮겨주는 연산으로 이를 해결할 수 있으므로 시간복잡도가  $ O(1) $이 된다.<br />
+이 과정에서 시간적으로 차이가 발생한다. 그렇기 때문에 popleft연산을 사용하는 자료구조를 만들 때에는 linked list형태나 deque를 활용한 코드의 사용이 좋다.</p>]]></content><author><name>정우빈</name></author><category term="Study" /><category term="python" /><summary type="html"><![CDATA[10828번 스택]]></summary></entry><entry><title type="html">백준 단계별 문제풀이 스터디 5주차</title><link href="http://localhost:4000/jekyll-theme-yat/study/2024/08/02/baekjoon-study-week5.html" rel="alternate" type="text/html" title="백준 단계별 문제풀이 스터디 5주차" /><published>2024-08-02T00:00:00+00:00</published><updated>2024-08-02T00:00:00+00:00</updated><id>http://localhost:4000/jekyll-theme-yat/study/2024/08/02/baekjoon-study-week5</id><content type="html" xml:base="http://localhost:4000/jekyll-theme-yat/study/2024/08/02/baekjoon-study-week5.html"><![CDATA[<h2 id="14888번-연산자-끼워넣기">14888번 연산자 끼워넣기</h2>
+<h3 id="링크">링크</h3>
+<p><a href="https://www.acmicpc.net/problem/14888">https://www.acmicpc.net/problem/14888</a></p>
+<h3 id="문제">문제</h3>
+<p>N개의 수로 이루어진 수열 A1, A2, …, AN이 주어진다. 또, 수와 수 사이에 끼워넣을 수 있는 N-1개의 연산자가 주어진다. 연산자는 덧셈(+), 뺄셈(-), 곱셈(×), 나눗셈(÷)으로만 이루어져 있다.</p>
+
+<p>우리는 수와 수 사이에 연산자를 하나씩 넣어서, 수식을 하나 만들 수 있다. 이때, 주어진 수의 순서를 바꾸면 안 된다.</p>
+
+<p>예를 들어, 6개의 수로 이루어진 수열이 1, 2, 3, 4, 5, 6이고, 주어진 연산자가 덧셈(+) 2개, 뺄셈(-) 1개, 곱셈(×) 1개, 나눗셈(÷) 1개인 경우에는 총 60가지의 식을 만들 수 있다. 예를 들어, 아래와 같은 식을 만들 수 있다.</p>
+
+<p>1+2+3-4×5÷6 1÷2+3+4-5×6 1+2÷3×4-5+6 1÷2×3-4+5+6 식의 계산은 연산자 우선 순위를 무시하고 앞에서부터 진행해야 한다. 또, 나눗셈은 정수 나눗셈으로 몫만 취한다. 음수를 양수로 나눌 때는 C++14의 기준을 따른다. 즉, 양수로 바꾼 뒤 몫을 취하고, 그 몫을 음수로 바꾼 것과 같다. 이에 따라서, 위의 식 4개의 결과를 계산해보면 아래와 같다.</p>
+
+<p>1+2+3-4×5÷6 = 1 1÷2+3+4-5×6 = 12 1+2÷3×4-5+6 = 5 1÷2×3-4+5+6 = 7 N개의 수와 N-1개의 연산자가 주어졌을 때, 만들 수 있는 식의 결과가 최대인 것과 최소인 것을 구하는 프로그램을 작성하시오.</p>
+<h3 id="입력">입력</h3>
+<p>첫째 줄에 수의 개수 N(2 ≤ N ≤ 11)가 주어진다. 둘째 줄에는 A1, A2, …, AN이 주어진다. (1 ≤ Ai ≤ 100) 셋째 줄에는 합이 N-1인 4개의 정수가 주어지는데, 차례대로 덧셈(+)의 개수, 뺄셈(-)의 개수, 곱셈(×)의 개수, 나눗셈(÷)의 개수이다.</p>
+<h3 id="출력">출력</h3>
+<p>첫째 줄에 만들 수 있는 식의 결과의 최댓값을, 둘째 줄에는 최솟값을 출력한다. 연산자를 어떻게 끼워넣어도 항상 -10억보다 크거나 같고, 10억보다 작거나 같은 결과가 나오는 입력만 주어진다. 또한, 앞에서부터 계산했을 때, 중간에 계산되는 식의 결과도 항상 -10억보다 크거나 같고, 10억보다 작거나 같다.</p>
+<h3 id="코드">코드</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 중복순열 구현
+</span><span class="k">def</span> <span class="nf">product</span><span class="p">(</span><span class="n">list_of_elements</span><span class="p">,</span><span class="n">num</span><span class="p">):</span>
+  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">list_of_elements</span><span class="p">)):</span>
+    <span class="c1"># 한개 일 때 한 개 짜리 제너레이터 생성
+</span>    <span class="k">if</span> <span class="n">num</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+      <span class="k">yield</span> <span class="p">[</span><span class="n">list_of_elements</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
+    <span class="c1"># 여러개 일 때 한 개 짜리+뒤에꺼 제너레이터 반복으로 추가
+</span>    <span class="k">else</span> <span class="p">:</span>
+      <span class="k">for</span> <span class="nb">next</span> <span class="ow">in</span> <span class="n">product</span><span class="p">(</span><span class="n">list_of_elements</span><span class="p">,</span><span class="n">num</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="k">yield</span> <span class="p">[</span><span class="n">list_of_elements</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span><span class="o">+</span><span class="nb">next</span>
+
+<span class="c1"># 사칙연산 구현
+</span><span class="k">def</span> <span class="nf">calculator</span><span class="p">(</span><span class="n">num1</span><span class="p">,</span><span class="n">num2</span><span class="p">,</span><span class="n">op</span><span class="p">):</span>
+  <span class="k">if</span> <span class="n">op</span><span class="o">==</span><span class="s">"+"</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">num1</span><span class="o">+</span><span class="n">num2</span>
+  <span class="k">elif</span> <span class="n">op</span><span class="o">==</span><span class="s">"-"</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">num1</span><span class="o">-</span><span class="n">num2</span>
+  <span class="k">elif</span> <span class="n">op</span><span class="o">==</span><span class="s">"*"</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">num1</span><span class="o">*</span><span class="n">num2</span>
+  <span class="k">elif</span> <span class="n">op</span><span class="o">==</span><span class="s">"/"</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">num1</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">:</span>
+      <span class="n">num1</span><span class="o">=-</span><span class="n">num1</span>
+      <span class="k">return</span> <span class="o">-</span><span class="p">(</span><span class="n">num1</span><span class="o">//</span><span class="n">num2</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="k">return</span> <span class="n">num1</span><span class="o">//</span><span class="n">num2</span>
+
+<span class="c1">#입력값 저장
+</span><span class="n">number_of_numbers</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span>
+<span class="n">list_of_numbers</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span><span class="nb">input</span><span class="p">().</span><span class="n">split</span><span class="p">(</span><span class="s">" "</span><span class="p">)))</span>
+<span class="n">number_of_operators</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span><span class="nb">input</span><span class="p">().</span><span class="n">split</span><span class="p">(</span><span class="s">" "</span><span class="p">)))</span>
+<span class="n">list_of_operators</span><span class="o">=</span><span class="p">[</span><span class="s">"+"</span><span class="p">,</span><span class="s">"-"</span><span class="p">,</span><span class="s">"*"</span><span class="p">,</span><span class="s">"/"</span><span class="p">]</span>
+
+<span class="c1">#연산자 목록을 저장할 리스트 생성
+</span><span class="n">list_of_calculation</span><span class="o">=</span><span class="p">[]</span>
+<span class="c1">#4가지 연산자를 number_of_numbers-1개 만큼 뽑은 중복순열들에 대해 반복
+</span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">product</span><span class="p">(</span><span class="n">list_of_operators</span><span class="p">,</span><span class="n">number_of_numbers</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+  <span class="c1">#연산자 갯수 저장할 리스트 생성
+</span>  <span class="n">count_operators</span><span class="o">=</span><span class="p">[]</span>
+  <span class="c1">#모든 연산자에 대해 각 갯수를 append
+</span>  <span class="k">for</span> <span class="n">op</span> <span class="ow">in</span> <span class="n">list_of_operators</span><span class="p">:</span>
+    <span class="n">count_operators</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">op</span><span class="p">))</span>
+  <span class="c1">#연산자 갯수 리스트와 주어진 연산자 갯수가 같으면 연산자 목록에 append
+</span>  <span class="k">if</span> <span class="n">count_operators</span><span class="o">==</span><span class="n">number_of_operators</span><span class="p">:</span>
+    <span class="n">list_of_calculation</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+<span class="c1">#결과값 리스트 생성
+</span><span class="n">result_list</span><span class="o">=</span><span class="p">[]</span>
+<span class="c1">#연산자 목록 리스트에 대해 반복
+</span><span class="k">for</span> <span class="n">calc_list</span> <span class="ow">in</span> <span class="n">list_of_calculation</span><span class="p">:</span>
+  <span class="c1">#result에 주어진 첫번째수 저장
+</span>  <span class="n">result</span><span class="o">=</span><span class="n">list_of_numbers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+  <span class="c1">#카운트 1로 초기화
+</span>  <span class="n">count</span><span class="o">=</span><span class="mi">1</span>
+  <span class="c1">#연산자리스트에 대해 반복
+</span>  <span class="k">for</span> <span class="n">op</span> <span class="ow">in</span> <span class="n">calc_list</span><span class="p">:</span>
+    <span class="c1">#result에 순서대로 계산한 값을 저장
+</span>    <span class="n">result</span><span class="o">=</span><span class="n">calculator</span><span class="p">(</span><span class="n">result</span><span class="p">,</span><span class="n">list_of_numbers</span><span class="p">[</span><span class="n">count</span><span class="p">],</span><span class="n">op</span><span class="p">)</span>
+    <span class="c1">#카운트증가
+</span>    <span class="n">count</span><span class="o">+=</span><span class="mi">1</span>
+  <span class="c1">#result값 결과값 리스트에 저장
+</span>  <span class="n">result_list</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+<span class="c1">#결과값 리스트 최댓값 출력
+</span><span class="k">print</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">result_list</span><span class="p">))</span>
+<span class="c1">#결과값 리스트 최솟값 출력
+</span><span class="k">print</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">result_list</span><span class="p">))</span>
+</code></pre></div></div>
+<p>중복순열 구현과정에서 yield를 사용하는 과정을 참고하였다.<br />
+yield 개념 <a href="https://www.daleseo.com/python-yield/">https://www.daleseo.com/python-yield/</a><br />
+파이썬 순열조합 구현 <a href="https://juhee-maeng.tistory.com/91">https://juhee-maeng.tistory.com/91</a></p>]]></content><author><name>정우빈</name></author><category term="Study" /><category term="python" /><summary type="html"><![CDATA[14888번 연산자 끼워넣기 링크 https://www.acmicpc.net/problem/14888 문제 N개의 수로 이루어진 수열 A1, A2, …, AN이 주어진다. 또, 수와 수 사이에 끼워넣을 수 있는 N-1개의 연산자가 주어진다. 연산자는 덧셈(+), 뺄셈(-), 곱셈(×), 나눗셈(÷)으로만 이루어져 있다.]]></summary></entry><entry><title type="html">백준 단계별 문제풀이 스터디 4주차</title><link href="http://localhost:4000/jekyll-theme-yat/study/2024/07/26/baekjoon-study-week4.html" rel="alternate" type="text/html" title="백준 단계별 문제풀이 스터디 4주차" /><published>2024-07-26T00:00:00+00:00</published><updated>2024-07-26T00:00:00+00:00</updated><id>http://localhost:4000/jekyll-theme-yat/study/2024/07/26/baekjoon-study-week4</id><content type="html" xml:base="http://localhost:4000/jekyll-theme-yat/study/2024/07/26/baekjoon-study-week4.html"><![CDATA[<h2 id="11729번-하노이-탑-이동-순서">11729번 하노이 탑 이동 순서</h2>
+<h3 id="링크">링크</h3>
+<p><a href="https://www.acmicpc.net/problem/11729">https://www.acmicpc.net/problem/11729</a></p>
+<h3 id="문제">문제</h3>
+<p>세 개의 장대가 있고 첫 번째 장대에는 반경이 서로 다른 n개의 원판이 쌓여 있다.
+각 원판은 반경이 큰 순서대로 쌓여있다. 이제 수도승들이 다음 규칙에 따라 첫 번째 장대에서 세 번째 장대로 옮기려 한다.</p>
+
+<p>한 번에 한 개의 원판만을 다른 탑으로 옮길 수 있다.
+쌓아 놓은 원판은 항상 위의 것이 아래의 것보다 작아야 한다.
+이 작업을 수행하는데 필요한 이동 순서를 출력하는 프로그램을 작성하라. 단, 이동 횟수는 최소가 되어야 한다.</p>
+<h3 id="입력">입력</h3>
+<p>첫째 줄에 첫 번째 장대에 쌓인 원판의 개수 N (1 ≤ N ≤ 20)이 주어진다.</p>
+<h3 id="출력">출력</h3>
+<p>첫째 줄에 옮긴 횟수 K를 출력한다.
+두 번째 줄부터 수행 과정을 출력한다. 두 번째 줄부터 K개의 줄에 걸쳐 두 정수 A B를 빈칸을 사이에 두고 출력하는데, 이는 A번째 탑의 가장 위에 있는 원판을 B번째 탑의 가장 위로 옮긴다는 뜻이다.</p>
+<h3 id="코드">코드</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">hanoi</span><span class="p">(</span><span class="n">move_list</span><span class="p">,</span><span class="n">num</span><span class="p">,</span><span class="n">start</span><span class="p">,</span><span class="n">middle</span><span class="p">,</span><span class="n">end</span><span class="p">):</span>
+  <span class="c1"># 판이 한개일때의 처리
+</span>  <span class="k">if</span> <span class="n">num</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+    <span class="c1"># 시작점에서 끝점으로 판을 이동
+</span>    <span class="n">move_list</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">start</span><span class="o">+</span><span class="s">" "</span><span class="o">+</span><span class="n">end</span><span class="p">)</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="c1">#num개 짜리 문제를 풀기전에
+</span>    <span class="c1">#num-1개 짜리 하노이탑을 시작점에서 중간점으로 옮기는 문제를 풀어야한다.
+</span>    <span class="n">hanoi</span><span class="p">(</span><span class="n">move_list</span><span class="p">,</span><span class="n">num</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">start</span><span class="p">,</span><span class="n">end</span><span class="p">,</span><span class="n">middle</span><span class="p">)</span>
+    <span class="c1">#맨밑에 있던 판을 시작점에서 끝점으로 옮긴다.
+</span>    <span class="n">move_list</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">start</span><span class="o">+</span><span class="s">" "</span><span class="o">+</span><span class="n">end</span><span class="p">)</span>
+    <span class="c1">#num-1개 짜리 하노이탑을 중간점에서 끝점으로 옮기는 문제를 풀어야한다.
+</span>    <span class="n">hanoi</span><span class="p">(</span><span class="n">move_list</span><span class="p">,</span><span class="n">num</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">middle</span><span class="p">,</span><span class="n">start</span><span class="p">,</span><span class="n">end</span><span class="p">)</span>
+
+<span class="c1"># 판의 갯수 입력받기
+</span><span class="n">Int_NumberOfDiscs</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span>
+<span class="c1"># 판의 이동을 저장할 빈 리스트 생성
+</span><span class="n">move_list</span><span class="o">=</span><span class="p">[]</span>
+<span class="c1"># 하노이탑 문제 풀기
+</span><span class="n">hanoi</span><span class="p">(</span><span class="n">move_list</span><span class="p">,</span><span class="n">Int_NumberOfDiscs</span><span class="p">,</span><span class="s">"1"</span><span class="p">,</span><span class="s">"2"</span><span class="p">,</span><span class="s">"3"</span><span class="p">)</span>
+
+<span class="c1"># 이동횟수 출력
+</span><span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">move_list</span><span class="p">))</span>
+<span class="c1"># 이동내역 출력
+</span><span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">move_list</span><span class="p">:</span>
+  <span class="k">print</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="1004번-어린왕자">1004번 어린왕자</h2>
+<h3 id="링크-1">링크</h3>
+<p><a href="https://www.acmicpc.net/problem/1004">https://www.acmicpc.net/problem/1004</a></p>
+<h3 id="문제-1">문제</h3>
+<p>어린 왕자는 소혹성 B-664에서 자신이 사랑하는 한 송이 장미를 위해 살아간다. 어느 날 장미가 위험에 빠지게 된 것을 알게 된 어린 왕자는, 장미를 구하기 위해 은하수를 따라 긴 여행을 하기 시작했다. 하지만 어린 왕자의 우주선은 그렇게 좋지 않아서 행성계 간의 이동을 최대한 피해서 여행해야 한다. 아래의 그림은 어린 왕자가 펼쳐본 은하수 지도의 일부이다.</p>
+
+<p><img src="https://onlinejudgeimages.s3-ap-northeast-1.amazonaws.com/upload/201003/dfcmhrjj_113gw6bcng2_b.gif" alt="이미지" /></p>
+
+<p>빨간 실선은 어린 왕자가 출발점에서 도착점까지 도달하는데 있어서 필요한 행성계 진입/이탈 횟수를 최소화하는 경로이며, 원은 행성계의 경계를 의미한다. 이러한 경로는 여러 개 존재할 수 있지만 적어도 3번의 행성계 진입/이탈이 필요하다는 것을 알 수 있다.</p>
+
+<p>위와 같은 은하수 지도, 출발점, 도착점이 주어졌을 때 어린 왕자에게 필요한 최소의 행성계 진입/이탈 횟수를 구하는 프로그램을 작성해 보자. 행성계의 경계가 맞닿거나 서로 교차하는 경우는 없다. 또한, 출발점이나 도착점이 행성계 경계에 걸쳐진 경우 역시 입력으로 주어지지 않는다.</p>
+<h3 id="입력-1">입력</h3>
+<p>입력의 첫 줄에는 테스트 케이스의 개수 T가 주어진다. 그 다음 줄부터 각각의 테스트케이스에 대해 첫째 줄에 출발점 (x1, y1)과 도착점 (x2, y2)이 주어진다. 두 번째 줄에는 행성계의 개수 n이 주어지며, 세 번째 줄부터 n줄에 걸쳐 행성계의 중점과 반지름 (cx, cy, r)이 주어진다.</p>
+<h3 id="출력-1">출력</h3>
+<p>각 테스트 케이스에 대해 어린 왕자가 거쳐야 할 최소의 행성계 진입/이탈 횟수를 출력한다.</p>
+<h3 id="코드-1">코드</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 출발점 O 도착점 O False
+# 출발점 1 도착점 O True
+# 출발점 O 도착점 1 True
+# 출발점 1 도착점 1 False
+</span>
+<span class="c1">#boolA와 boolB간의 xor연산을 하는 함수
+</span><span class="k">def</span> <span class="nf">xor</span><span class="p">(</span><span class="n">boolA</span><span class="p">,</span><span class="n">boolB</span><span class="p">):</span>
+  <span class="k">if</span> <span class="n">boolA</span><span class="o">==</span><span class="bp">False</span> <span class="ow">and</span> <span class="n">boolB</span><span class="o">==</span><span class="bp">False</span><span class="p">:</span>
+    <span class="k">return</span> <span class="bp">False</span>
+  <span class="k">elif</span> <span class="n">boolA</span><span class="o">==</span><span class="bp">True</span> <span class="ow">and</span> <span class="n">boolB</span><span class="o">==</span><span class="bp">True</span><span class="p">:</span>
+    <span class="k">return</span> <span class="bp">False</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="k">return</span> <span class="bp">True</span>
+
+<span class="c1">#점A(ax,ay)와 점B(bx,by)사이의 거리를 구하는 함수
+</span><span class="k">def</span> <span class="nf">distance</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span><span class="n">ay</span><span class="p">,</span><span class="n">bx</span><span class="p">,</span><span class="n">by</span><span class="p">):</span>
+  <span class="k">return</span><span class="p">((</span><span class="n">bx</span><span class="o">-</span><span class="n">ax</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="p">(</span><span class="n">by</span><span class="o">-</span><span class="n">ay</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">Int_NumberOfTestCases</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Int_NumberOfTestCases</span><span class="p">):</span>
+  <span class="c1"># 진입 이탈 횟수 카운터 만들기
+</span>  <span class="n">count</span><span class="o">=</span><span class="mi">0</span>
+  <span class="c1"># 시작점 도착점 좌표 받기
+</span>  <span class="n">list_startNend</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span><span class="nb">input</span><span class="p">().</span><span class="n">split</span><span class="p">(</span><span class="s">" "</span><span class="p">)))</span>
+  <span class="c1"># 앞에 두개 시작점에 저장
+</span>  <span class="n">start_point</span><span class="o">=</span><span class="n">list_startNend</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
+  <span class="c1"># 뒤에 두개 도착점에 저장
+</span>  <span class="n">end_point</span><span class="o">=</span><span class="n">list_startNend</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span>
+  <span class="c1"># 행성계 갯수 입력 받기
+</span>  <span class="n">Int_NumberOfPlanet</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span>
+  <span class="c1"># 행성계 갯수 만큼 반복
+</span>  <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Int_NumberOfPlanet</span><span class="p">):</span>
+    <span class="c1"># 행성계 좌표와 반지름 받기 0,1 은 좌표 2는 반지름
+</span>    <span class="n">planet_info</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span><span class="nb">input</span><span class="p">().</span><span class="n">split</span><span class="p">(</span><span class="s">" "</span><span class="p">)))</span>
+    <span class="c1"># xor 조건을 위한 Boolean 값 설정
+</span>    <span class="c1">#시작점을 포함하는지 True or False
+</span>    <span class="n">contains_start_point</span><span class="o">=</span><span class="n">distance</span><span class="p">(</span><span class="n">start_point</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">start_point</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">planet_info</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">planet_info</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">&lt;</span><span class="n">planet_info</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+    <span class="c1">#도착점을 포함하는지 True or False
+</span>    <span class="n">contains_end_point</span><span class="o">=</span><span class="n">distance</span><span class="p">(</span><span class="n">end_point</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">end_point</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">planet_info</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">planet_info</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">&lt;</span><span class="n">planet_info</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+    <span class="c1"># 둘중하나만 True면 카운터 늘리기
+</span>    <span class="k">if</span> <span class="n">xor</span><span class="p">(</span><span class="n">contains_start_point</span><span class="p">,</span><span class="n">contains_end_point</span><span class="p">):</span>
+      <span class="n">count</span><span class="o">+=</span><span class="mi">1</span>
+  <span class="c1"># 카운터 출력
+</span>  <span class="k">print</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
+</code></pre></div></div>]]></content><author><name>정우빈</name></author><category term="Study" /><category term="python" /><summary type="html"><![CDATA[11729번 하노이 탑 이동 순서 링크 https://www.acmicpc.net/problem/11729 문제 세 개의 장대가 있고 첫 번째 장대에는 반경이 서로 다른 n개의 원판이 쌓여 있다. 각 원판은 반경이 큰 순서대로 쌓여있다. 이제 수도승들이 다음 규칙에 따라 첫 번째 장대에서 세 번째 장대로 옮기려 한다.]]></summary></entry><entry><title type="html">백준 단계별 문제풀이 스터디 3주차</title><link href="http://localhost:4000/jekyll-theme-yat/study/2024/07/19/baekjoon-study-week3.html" rel="alternate" type="text/html" title="백준 단계별 문제풀이 스터디 3주차" /><published>2024-07-19T00:00:00+00:00</published><updated>2024-07-19T00:00:00+00:00</updated><id>http://localhost:4000/jekyll-theme-yat/study/2024/07/19/baekjoon-study-week3</id><content type="html" xml:base="http://localhost:4000/jekyll-theme-yat/study/2024/07/19/baekjoon-study-week3.html"><![CDATA[<h2 id="1546번-평균">1546번 평균</h2>
+<h3 id="링크">링크</h3>
+<p><a href="https://www.acmicpc.net/problem/1546">https://www.acmicpc.net/problem/1546</a></p>
+<h3 id="문제">문제</h3>
+<p>세준이는 기말고사를 망쳤다. 세준이는 점수를 조작해서 집에 가져가기로 했다. 일단 세준이는 자기 점수 중에 최댓값을 골랐다. 이 값을 M이라고 한다. 그리고 나서 모든 점수를 점수/M*100으로 고쳤다.</p>
+
+<p>예를 들어, 세준이의 최고점이 70이고, 수학점수가 50이었으면 수학점수는 50/70*100이 되어 71.43점이 된다.</p>
+
+<p>세준이의 성적을 위의 방법대로 새로 계산했을 때, 새로운 평균을 구하는 프로그램을 작성하시오.</p>
+<h3 id="입력">입력</h3>
+<p>첫째 줄에 시험 본 과목의 개수 N이 주어진다. 이 값은 1000보다 작거나 같다. 둘째 줄에 세준이의 현재 성적이 주어진다. 이 값은 100보다 작거나 같은 음이 아닌 정수이고, 적어도 하나의 값은 0보다 크다.</p>
+<h3 id="출력">출력</h3>
+<p>첫째 줄에 새로운 평균을 출력한다. 실제 정답과 출력값의 절대오차 또는 상대오차가 10-2 이하이면 정답이다.</p>
+<h3 id="코드">코드</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 입력값 변수에 저장
+</span><span class="n">Int_NumberOfScores</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span>
+<span class="n">IntArr_Scores</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span><span class="nb">input</span><span class="p">().</span><span class="n">split</span><span class="p">(</span><span class="s">" "</span><span class="p">)))</span>
+
+<span class="c1"># 점수 최댓값 저장
+</span><span class="n">Int_MaxScore</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="n">IntArr_Scores</span><span class="p">)</span>
+
+<span class="c1"># 조작점수 총계 계산
+</span><span class="n">TotalScore</span><span class="o">=</span><span class="mi">0</span>
+<span class="k">for</span> <span class="n">score</span> <span class="ow">in</span> <span class="n">IntArr_Scores</span><span class="p">:</span>
+    <span class="n">TotalScore</span><span class="o">+=</span><span class="p">(</span><span class="n">score</span><span class="o">/</span><span class="n">Int_MaxScore</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span>
+
+<span class="c1"># 조작점수 평균 계산
+</span><span class="k">print</span><span class="p">(</span><span class="n">TotalScore</span><span class="o">/</span><span class="n">Int_NumberOfScores</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="4344번-평균은-넘겠지">4344번 평균은 넘겠지</h2>
+<h3 id="링크-1">링크</h3>
+<p><a href="https://www.acmicpc.net/problem/4344">https://www.acmicpc.net/problem/4344</a></p>
+<h3 id="문제-1">문제</h3>
+<p>대학생 새내기들의 90%는 자신이 반에서 평균은 넘는다고 생각한다. 당신은 그들에게 슬픈 진실을 알려줘야 한다.</p>
+<h3 id="입력-1">입력</h3>
+<p>첫째 줄에는 테스트 케이스의 개수 C가 주어진다.</p>
+
+<p>둘째 줄부터 각 테스트 케이스마다 학생의 수 N(1 ≤ N ≤ 1000, N은 정수)이 첫 수로 주어지고, 이어서 N명의 점수가 주어진다. 점수는 0보다 크거나 같고, 100보다 작거나 같은 정수이다.</p>
+<h3 id="출력-1">출력</h3>
+<p>각 케이스마다 한 줄씩 평균을 넘는 학생들의 비율을 반올림하여 소수점 셋째 자리까지 출력한다.</p>
+<h3 id="코드-1">코드</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 입력값 변수에 저장
+</span><span class="n">Int_NumberOfCases</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span>
+<span class="n">CaseList</span><span class="o">=</span><span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Int_NumberOfCases</span><span class="p">):</span>
+    <span class="n">CaseList</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span><span class="nb">input</span><span class="p">().</span><span class="n">split</span><span class="p">(</span><span class="s">" "</span><span class="p">))))</span>
+
+<span class="c1"># 각 케이스에 대해 실행
+</span><span class="k">for</span> <span class="n">case</span> <span class="ow">in</span> <span class="n">CaseList</span><span class="p">:</span>
+    <span class="c1"># 카운트 초기화
+</span>    <span class="n">count</span><span class="o">=</span><span class="mi">0</span>
+    <span class="c1"># 케이스 평균 계산
+</span>    <span class="n">Int_Average</span><span class="o">=</span><span class="nb">sum</span><span class="p">(</span><span class="n">case</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span><span class="o">/</span><span class="n">case</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="c1"># 케이스의 요소별로 평균과 비교
+</span>    <span class="k">for</span> <span class="n">score</span> <span class="ow">in</span> <span class="n">case</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+        <span class="k">if</span> <span class="n">score</span><span class="o">&gt;</span><span class="n">Int_Average</span><span class="p">:</span>
+        <span class="n">count</span><span class="o">+=</span><span class="mi">1</span>
+    <span class="c1"># 결과출력
+</span>    <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="p">(</span><span class="n">count</span><span class="o">/</span><span class="n">case</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="p">.</span><span class="mi">3</span><span class="n">f</span><span class="si">}</span><span class="s">%"</span><span class="p">)</span>
+</code></pre></div></div>
+<h2 id="1065번-한수">1065번 한수</h2>
+<h3 id="링크-2">링크</h3>
+<p><a href="https://www.acmicpc.net/problem/1065">https://www.acmicpc.net/problem/1065</a></p>
+<h3 id="문제-2">문제</h3>
+<p>어떤 양의 정수 X의 각 자리가 등차수열을 이룬다면, 그 수를 한수라고 한다. 등차수열은 연속된 두 개의 수의 차이가 일정한 수열을 말한다. N이 주어졌을 때, 1보다 크거나 같고, N보다 작거나 같은 한수의 개수를 출력하는 프로그램을 작성하시오.</p>
+<h3 id="입력-2">입력</h3>
+<p>첫째 줄에 1,000보다 작거나 같은 자연수 N이 주어진다.</p>
+<h3 id="출력-2">출력</h3>
+<p>첫째 줄에 1보다 크거나 같고, N보다 작거나 같은 한수의 개수를 출력한다.</p>
+<h3 id="코드-2">코드</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">isHanSu</span><span class="p">(</span><span class="n">number</span><span class="p">):</span>
+    <span class="c1"># 자리수 파악을 용이하게 하기위해 스트링으로 만들기
+</span>    <span class="n">Str_Number</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
+    <span class="c1"># 한자리 or 두자리수는 무조건 한수
+</span>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">Str_Number</span><span class="p">)</span><span class="o">==</span><span class="mi">1</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">Str_Number</span><span class="p">)</span><span class="o">==</span><span class="mi">2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">True</span>
+    <span class="c1"># 그게 아니면 한수인지 판별
+</span>    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># 제일 윗자리수와 다음자리수의 차이를 저장
+</span>        <span class="n">diff</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">Str_Number</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">-</span><span class="nb">int</span><span class="p">(</span><span class="n">Str_Number</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="c1"># 자릿수별로 아랫자리와 비교하여 등차가 깨지면 False
+</span>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">Str_Number</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">diff</span><span class="o">!=</span><span class="nb">int</span><span class="p">(</span><span class="n">Str_Number</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">-</span><span class="nb">int</span><span class="p">(</span><span class="n">Str_Number</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]):</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        <span class="c1"># 끝까지 다돌았으면 등차라는 거니까 True
+</span>        <span class="k">return</span> <span class="bp">True</span>
+
+<span class="c1"># 입력값 변수에 저장
+</span><span class="n">Int_Number</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span>
+
+<span class="c1"># 카운트 초기화
+</span><span class="n">count</span><span class="o">=</span><span class="mi">0</span>
+<span class="c1"># 1~Int_Number까지 반복
+</span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">Int_Number</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+    <span class="c1"># i 가 한수이면 count에 +1
+</span>    <span class="k">if</span> <span class="n">isHanSu</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+        <span class="n">count</span><span class="o">+=</span><span class="mi">1</span>
+<span class="c1"># 결과 출력
+</span><span class="k">print</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
+</code></pre></div></div>]]></content><author><name>정우빈</name></author><category term="Study" /><category term="python" /><summary type="html"><![CDATA[1546번 평균 링크 https://www.acmicpc.net/problem/1546 문제 세준이는 기말고사를 망쳤다. 세준이는 점수를 조작해서 집에 가져가기로 했다. 일단 세준이는 자기 점수 중에 최댓값을 골랐다. 이 값을 M이라고 한다. 그리고 나서 모든 점수를 점수/M*100으로 고쳤다.]]></summary></entry><entry><title type="html">백준 단계별 문제풀이 스터디 2주차</title><link href="http://localhost:4000/jekyll-theme-yat/study/2024/07/12/baekjoon-study-week2.html" rel="alternate" type="text/html" title="백준 단계별 문제풀이 스터디 2주차" /><published>2024-07-12T00:00:00+00:00</published><updated>2024-07-12T00:00:00+00:00</updated><id>http://localhost:4000/jekyll-theme-yat/study/2024/07/12/baekjoon-study-week2</id><content type="html" xml:base="http://localhost:4000/jekyll-theme-yat/study/2024/07/12/baekjoon-study-week2.html"><![CDATA[<h2 id="2869번-달팽이는-올라가고-싶다">2869번 달팽이는 올라가고 싶다</h2>
+<h3 id="링크">링크</h3>
+<p><a href="https://www.acmicpc.net/problem/2869">https://www.acmicpc.net/problem/2869</a></p>
+<h3 id="문제">문제</h3>
+<p>땅 위에 달팽이가 있다. 이 달팽이는 높이가 V미터인 나무 막대를 올라갈 것이다.</p>
+
+<p>달팽이는 낮에 A미터 올라갈 수 있다. 하지만, 밤에 잠을 자는 동안 B미터 미끄러진다. 또, 정상에 올라간 후에는 미끄러지지 않는다.</p>
+
+<p>달팽이가 나무 막대를 모두 올라가려면, 며칠이 걸리는지 구하는 프로그램을 작성하시오.</p>
+<h3 id="입력">입력</h3>
+<p>첫째 줄에 세 정수 A, B, V가 공백으로 구분되어서 주어진다. (1 ≤ B &lt; A ≤ V ≤ 1,000,000,000)</p>
+<h3 id="출력">출력</h3>
+<p>첫째 줄에 달팽이가 나무 막대를 모두 올라가는데 며칠이 걸리는지 출력한다.</p>
+<h3 id="코드">코드</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#입력을 각 변수에 저장
+</span><span class="n">intArr_input</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span><span class="nb">input</span><span class="p">().</span><span class="n">split</span><span class="p">(</span><span class="s">" "</span><span class="p">)))</span>
+<span class="n">int_ClimbDistance</span><span class="o">=</span><span class="n">intArr_input</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">int_SlipDistance</span><span class="o">=</span><span class="n">intArr_input</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">int_HeightOfTree</span><span class="o">=</span><span class="n">intArr_input</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+
+<span class="c1">#날짜 카운터와 현위치를 저장할 변수 초기화
+</span><span class="n">int_DayCount</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">int_CurrentHeight</span><span class="o">=</span><span class="mi">0</span>
+
+<span class="c1">#무한히 반복
+</span><span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+  <span class="c1"># n일차 카운팅
+</span>  <span class="n">int_DayCount</span><span class="o">+=</span><span class="mi">1</span>
+  <span class="c1"># 등반 후 높이 도달 비교
+</span>  <span class="n">int_CurrentHeight</span><span class="o">+=</span><span class="n">int_ClimbDistance</span>
+  <span class="c1"># 높이에 도달했다면 break
+</span>  <span class="k">if</span> <span class="n">int_CurrentHeight</span><span class="o">&gt;=</span><span class="n">int_HeightOfTree</span><span class="p">:</span>
+    <span class="k">break</span>
+  <span class="c1"># 자는동안 미끄러지는 높이
+</span>  <span class="n">int_CurrentHeight</span><span class="o">-=</span><span class="n">int_SlipDistance</span>
+
+<span class="c1">#걸린 날짜를 출력
+</span><span class="k">print</span><span class="p">(</span><span class="n">int_DayCount</span><span class="p">)</span>
+</code></pre></div></div>
+<p>위의 방법이 가장 직관적인 방법이다. 하지만 문제에 0.15초라는 시간제한이 존재하기 때문에 위 과정을 수식으로 표현해 간단하게 계산해낼 필요가 있다.<br />
+문제에서처럼 오르는거리를 A, 미끄러지는거리를 B, 나무높이를 V, 총걸리는 일수를 n이라고 하고 식을 정리하면</p>
+
+<p>$An-B(n-1) \geq V$</p>
+
+<p>$A+(A-B)(n-1) \geq V$</p>
+
+<p>$(A-B)(n-1) \geq V-A$</p>
+
+<p>$n-1 \geq (V-A)/(A-B)$</p>
+
+<p>$n \geq (V-A)/(A-B)+1$</p>
+
+<p>위와 같이 나타낼 수 있다.<br />
+이때 n은 일 수에 해당하기 때문에 정수형태로 밖에 나타낼 수 없다.<br />
+예를들어, $n \geq 5.5$일경우 $n=6$으로 $n \geq 3.3$일경우 $n=4$로 나타나야 한다.<br />
+이 과정은 소숫점을 올림 처리하는것과 같다.<br />
+이를 적용해 코드를 작성하면 아래와 같이 작성할 수 있다.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">math</span>
+<span class="c1">#입력을 각 변수에 저장
+</span><span class="n">intArr_input</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span><span class="nb">input</span><span class="p">().</span><span class="n">split</span><span class="p">(</span><span class="s">" "</span><span class="p">)))</span>
+<span class="n">int_ClimbDistance</span><span class="o">=</span><span class="n">intArr_input</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">int_SlipDistance</span><span class="o">=</span><span class="n">intArr_input</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">int_HeightOfTree</span><span class="o">=</span><span class="n">intArr_input</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+
+<span class="c1">#수식을 작성한 후 올림을 적용
+</span><span class="n">int_DaysTaken</span><span class="o">=</span><span class="n">math</span><span class="p">.</span><span class="n">ceil</span><span class="p">(((</span><span class="n">int_HeightOfTree</span><span class="o">-</span><span class="n">int_ClimbDistance</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">int_ClimbDistance</span><span class="o">-</span><span class="n">int_SlipDistance</span><span class="p">))</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1">#걸린 날짜를 출력
+</span><span class="k">print</span><span class="p">(</span><span class="n">int_DaysTaken</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="3003번-킹-퀸-룩-비숍-나이트-폰">3003번 킹, 퀸, 룩, 비숍, 나이트, 폰</h2>
+<h3 id="링크-1">링크</h3>
+<p><a href="https://www.acmicpc.net/problem/3003">https://www.acmicpc.net/problem/3003</a></p>
+<h3 id="문제-1">문제</h3>
+<p>동혁이는 오래된 창고를 뒤지다가 낡은 체스판과 피스를 발견했다.</p>
+
+<p>체스판의 먼지를 털어내고 걸레로 닦으니 그럭저럭 쓸만한 체스판이 되었다. 하지만, 검정색 피스는 모두 있었으나, 흰색 피스는 개수가 올바르지 않았다.</p>
+
+<p>체스는 총 16개의 피스를 사용하며, 킹 1개, 퀸 1개, 룩 2개, 비숍 2개, 나이트 2개, 폰 8개로 구성되어 있다.</p>
+
+<p>동혁이가 발견한 흰색 피스의 개수가 주어졌을 때, 몇 개를 더하거나 빼야 올바른 세트가 되는지 구하는 프로그램을 작성하시오.</p>
+<h3 id="입력-1">입력</h3>
+<p>첫째 줄에 동혁이가 찾은 흰색 킹, 퀸, 룩, 비숍, 나이트, 폰의 개수가 주어진다. 이 값은 0보다 크거나 같고 10보다 작거나 같은 정수이다.</p>
+<h3 id="출력-1">출력</h3>
+<p>첫째 줄에 입력에서 주어진 순서대로 몇 개의 피스를 더하거나 빼야 되는지를 출력한다. 만약 수가 양수라면 동혁이는 그 개수 만큼 피스를 더해야 하는 것이고, 음수라면 제거해야 하는 것이다.</p>
+<h3 id="코드-1">코드</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#입력을 각 변수에 저장
+</span><span class="n">intArr_input</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span><span class="nb">input</span><span class="p">().</span><span class="n">split</span><span class="p">(</span><span class="s">" "</span><span class="p">)))</span>
+
+<span class="c1">#모든 피스의 본 구성을 입력한 배열 생성
+</span><span class="n">intArr_FullPiece</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">8</span><span class="p">]</span>
+
+<span class="c1">#입력받은 피스와의 차를 계산
+</span><span class="n">strArr_MissingPiece</span><span class="o">=</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">intArr_FullPiece</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">intArr_input</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">intArr_input</span><span class="p">))]</span>
+
+<span class="c1">#계산된 맞지않는 피스의 수 리스트를 출력
+</span><span class="k">print</span><span class="p">(</span><span class="s">" "</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">strArr_MissingPiece</span><span class="p">))</span>
+</code></pre></div></div>
+<p>입력받은 피스와 본구성의 차를 계산하는 과정에서 list comprehension을 사용하였다.</p>
+
+<p>참고 : <a href="https://shoark7.github.io/programming/python/about-list-comprehension-python">https://shoark7.github.io/programming/python/about-list-comprehension-python</a></p>
+
+<h2 id="25304번-영수증">25304번 영수증</h2>
+<h3 id="링크-2">링크</h3>
+<p><a href="https://www.acmicpc.net/problem/25304">https://www.acmicpc.net/problem/25304</a></p>
+<h3 id="문제-2">문제</h3>
+<p>준원이는 저번 주에 살면서 처음으로 코스트코를 가 봤다. 정말 멋졌다. 그런데, 몇 개 담지도 않았는데 수상하게 높은 금액이 나오는 것이다! 준원이는 영수증을 보면서 정확하게 계산된 것이 맞는지 확인해보려 한다.</p>
+
+<p>영수증에 적힌,</p>
+
+<p>구매한 각 물건의 가격과 개수 구매한 물건들의 총 금액 을 보고, 구매한 물건의 가격과 개수로 계산한 총 금액이 영수증에 적힌 총 금액과 일치하는지 검사해보자.</p>
+<h3 id="입력-2">입력</h3>
+<p>첫째 줄에는 영수증에 적힌 총 금액  X 가 주어진다.</p>
+
+<p>둘째 줄에는 영수증에 적힌 구매한 물건의 종류의 수  N 이 주어진다.</p>
+
+<p>이후  N 개의 줄에는 각 물건의 가격  a 와 개수  b 가 공백을 사이에 두고 주어진다.</p>
+<h3 id="출력-2">출력</h3>
+<p>구매한 물건의 가격과 개수로 계산한 총 금액이 영수증에 적힌 총 금액과 일치하면 Yes를 출력한다. 일치하지 않는다면 No를 출력한다.</p>
+<h3 id="제한">제한</h3>
+<p>● 1 ≤ X ≤ 1,000,000,000<br />
+● 1 ≤ N ≤ 100<br />
+● 1 ≤ a ≤ 1,000,000<br />
+● 1 ≤ b ≤ 10</p>
+<h3 id="코드-2">코드</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#입력을 각 변수에 저장
+</span><span class="n">int_TotalPrice</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span>
+<span class="n">int_KindOfThings</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span>
+<span class="c1">#각 물품의 가격과 갯수를 저장할 리스트 생성
+</span><span class="n">list_PriceNAmount</span><span class="o">=</span><span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">int_KindOfThings</span><span class="p">):</span>
+  <span class="n">list_PriceNAmount</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span><span class="nb">input</span><span class="p">().</span><span class="n">split</span><span class="p">(</span><span class="s">" "</span><span class="p">))))</span>
+
+<span class="c1">#총합계 계산
+</span><span class="n">int_CalculatedTotalPrice</span><span class="o">=</span><span class="mi">0</span>
+<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">list_PriceNAmount</span><span class="p">:</span>
+  <span class="n">int_CalculatedTotalPrice</span><span class="o">+=</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="c1">#기존 총합계와 일치 여부 확인
+</span><span class="k">if</span> <span class="n">int_TotalPrice</span><span class="o">==</span><span class="n">int_CalculatedTotalPrice</span><span class="p">:</span>
+  <span class="k">print</span><span class="p">(</span><span class="s">"Yes"</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+  <span class="k">print</span><span class="p">(</span><span class="s">"No"</span><span class="p">)</span>
+</code></pre></div></div>]]></content><author><name>정우빈</name></author><category term="Study" /><category term="python" /><summary type="html"><![CDATA[2869번 달팽이는 올라가고 싶다 링크 https://www.acmicpc.net/problem/2869 문제 땅 위에 달팽이가 있다. 이 달팽이는 높이가 V미터인 나무 막대를 올라갈 것이다.]]></summary></entry><entry><title type="html">백준 단계별 문제풀이 스터디 1주차</title><link href="http://localhost:4000/jekyll-theme-yat/study/2024/07/05/baekjoon-study-week1.html" rel="alternate" type="text/html" title="백준 단계별 문제풀이 스터디 1주차" /><published>2024-07-05T00:00:00+00:00</published><updated>2024-07-05T00:00:00+00:00</updated><id>http://localhost:4000/jekyll-theme-yat/study/2024/07/05/baekjoon-study-week1</id><content type="html" xml:base="http://localhost:4000/jekyll-theme-yat/study/2024/07/05/baekjoon-study-week1.html"><![CDATA[<h2 id="10871번-x보다-작은수">10871번 X보다 작은수</h2>
+<h3 id="링크">링크</h3>
+<p><a href="https://www.acmicpc.net/problem/10871">https://www.acmicpc.net/problem/10871</a></p>
+
+<h3 id="문제">문제</h3>
+<p>정수 N개로 이루어진 수열 A와 정수 X가 주어진다. 이때, A에서 X보다 작은 수를 모두 출력하는 프로그램을 작성하시오.</p>
+
+<h3 id="입력">입력</h3>
+<p>첫째 줄에 N과 X가 주어진다. (1 ≤ N, X ≤ 10,000)</p>
+
+<p>둘째 줄에 수열 A를 이루는 정수 N개가 주어진다. 주어지는 정수는 모두 1보다 크거나 같고, 10,000보다 작거나 같은 정수이다.</p>
+
+<h3 id="출력">출력</h3>
+<p>X보다 작은 수를 입력받은 순서대로 공백으로 구분해 출력한다. X보다 작은 수는 적어도 하나 존재한다.</p>
+
+<h3 id="코드">코드</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 첫번째줄 입력을 변수에 저장
+</span><span class="n">strarr_input</span><span class="o">=</span><span class="nb">input</span><span class="p">().</span><span class="n">split</span><span class="p">(</span><span class="s">" "</span><span class="p">)</span>
+<span class="n">int_LengthOfArray</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">strarr_input</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">int_TargetNumber</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">strarr_input</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="c1"># 두번째줄 입력을 변수에 저장
+</span><span class="n">intarr_ArrayOfNumbers</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span><span class="nb">input</span><span class="p">().</span><span class="n">split</span><span class="p">(</span><span class="s">" "</span><span class="p">)))</span>
+
+<span class="c1"># 비교 후 값을 저장할 리스트를 생성
+</span><span class="n">num_list</span><span class="o">=</span><span class="p">[]</span>
+<span class="c1"># 주어진 int array의 모든 값에 대하여 비교
+</span><span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">intarr_ArrayOfNumbers</span><span class="p">:</span>
+    <span class="c1"># num 이 int_TargetNumber보다 작은지 비교 후 num_list에 append
+</span>    <span class="k">if</span> <span class="n">num</span><span class="o">&lt;</span><span class="n">int_TargetNumber</span><span class="p">:</span>
+    <span class="n">num_list</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">num</span><span class="p">))</span>
+
+<span class="c1"># num_list를 공백으로 묶어 출력
+</span><span class="k">print</span><span class="p">(</span><span class="s">" "</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">num_list</span><span class="p">))</span>
+<span class="c1">#for num in num_list:
+#    print(f"{num}",end=" ")
+</span></code></pre></div></div>
+
+<h2 id="1110번-더하기-사이클">1110번 더하기 사이클</h2>
+<h3 id="링크-1">링크</h3>
+<p><a href="https://www.acmicpc.net/problem/1110">https://www.acmicpc.net/problem/1110</a></p>
+
+<h3 id="문제-1">문제</h3>
+<p>0보다 크거나 같고, 99보다 작거나 같은 정수가 주어질 때 다음과 같은 연산을 할 수 있다. 먼저 주어진 수가 10보다 작다면 앞에 0을 붙여 두 자리 수로 만들고, 각 자리의 숫자를 더한다. 그 다음, 주어진 수의 가장 오른쪽 자리 수와 앞에서 구한 합의 가장 오른쪽 자리 수를 이어 붙이면 새로운 수를 만들 수 있다. 다음 예를 보자.</p>
+
+<p>26부터 시작한다. 2+6 = 8이다. 새로운 수는 68이다. 6+8 = 14이다. 새로운 수는 84이다. 8+4 = 12이다. 새로운 수는 42이다. 4+2 = 6이다. 새로운 수는 26이다.</p>
+
+<p>위의 예는 4번만에 원래 수로 돌아올 수 있다. 따라서 26의 사이클의 길이는 4이다.</p>
+
+<p>N이 주어졌을 때, N의 사이클의 길이를 구하는 프로그램을 작성하시오.</p>
+
+<h3 id="입력-1">입력</h3>
+<p>첫째 줄에 N이 주어진다. N은 0보다 크거나 같고, 99보다 작거나 같은 정수이다.</p>
+
+<h3 id="출력-1">출력</h3>
+<p>첫째 줄에 N의 사이클 길이를 출력한다.</p>
+
+<h3 id="코드-1">코드</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#입력받은수를 저장하고 해당 수의 10의 자리수와 1의 자리수를 각각 저장
+</span><span class="n">int_input</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span>
+<span class="n">int_FrontNumber</span><span class="o">=</span><span class="n">int_input</span><span class="o">//</span><span class="mi">10</span>
+<span class="n">int_BackNumber</span><span class="o">=</span><span class="n">int_input</span><span class="o">%</span><span class="mi">10</span>
+
+<span class="c1">#사이클길이 카운터 0으로 초기화
+</span><span class="n">counter</span><span class="o">=</span><span class="mi">0</span>
+
+<span class="c1">#무한히 반복
+</span><span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="c1">#새로 생성되는 숫자의 앞자리와 뒷자리를 저장
+</span>    <span class="n">int_NewFront</span><span class="o">=</span><span class="n">int_BackNumber</span>
+    <span class="n">int_NewBack</span><span class="o">=</span><span class="p">(</span><span class="n">int_FrontNumber</span><span class="o">+</span><span class="n">int_BackNumber</span><span class="p">)</span><span class="o">%</span><span class="mi">10</span>
+    <span class="c1">#새로 생성된 숫자의 각 자릿수를 기존자리에 대체
+</span>    <span class="n">int_FrontNumber</span><span class="o">=</span><span class="n">int_NewFront</span>
+    <span class="n">int_BackNumber</span><span class="o">=</span><span class="n">int_NewBack</span>
+    <span class="c1">#카운터 1 증가
+</span>    <span class="n">counter</span><span class="o">+=</span><span class="mi">1</span>
+    <span class="c1">#새로운 숫자계산
+</span>    <span class="n">int_NewNumber</span><span class="o">=</span><span class="mi">10</span><span class="o">*</span><span class="n">int_NewFront</span><span class="o">+</span><span class="n">int_NewBack</span>
+    <span class="c1">#새로운 숫자가 최초 숫자와 같다면 break
+</span>    <span class="k">if</span> <span class="n">int_NewNumber</span><span class="o">==</span><span class="n">int_input</span><span class="p">:</span>
+        <span class="k">break</span>
+
+<span class="c1"># 카운터 출력
+</span><span class="k">print</span><span class="p">(</span><span class="n">counter</span><span class="p">)</span>
+</code></pre></div></div>]]></content><author><name>정우빈</name></author><category term="Study" /><category term="python" /><summary type="html"><![CDATA[10871번 X보다 작은수 링크 https://www.acmicpc.net/problem/10871]]></summary></entry><entry><title type="html">JavaScript 강의 3일차</title><link href="http://localhost:4000/jekyll-theme-yat/lecture/2024/03/12/javascript-day3.html" rel="alternate" type="text/html" title="JavaScript 강의 3일차" /><published>2024-03-12T00:00:00+00:00</published><updated>2024-03-12T00:00:00+00:00</updated><id>http://localhost:4000/jekyll-theme-yat/lecture/2024/03/12/javascript-day3</id><content type="html" xml:base="http://localhost:4000/jekyll-theme-yat/lecture/2024/03/12/javascript-day3.html"><![CDATA[<h2 id="array-dictionary">Array, Dictionary</h2>
+
+<hr />
+
+<h3 id="array">Array</h3>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">arrExample</span><span class="o">=</span><span class="p">[];</span>
+<span class="kd">let</span> <span class="nx">arrExample</span><span class="o">=</span><span class="k">new</span> <span class="nb">Array</span><span class="p">();</span>
+<span class="kd">let</span> <span class="nx">arrExample</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="dl">"</span><span class="s2">히틀러</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">잔다르크</span><span class="dl">"</span><span class="p">];</span>
+</code></pre></div></div>
+
+<h3 id="dictionary">Dictionary</h3>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">dictExample</span><span class="o">=</span><span class="p">{};</span>
+
+<span class="kd">let</span> <span class="nx">dictExample</span><span class="o">=</span><span class="p">{</span>
+    <span class="na">a</span><span class="p">:</span> <span class="dl">"</span><span class="s2">apple</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">b</span><span class="p">:</span> <span class="dl">"</span><span class="s2">banana</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">c</span><span class="p">:</span> <span class="dl">"</span><span class="s2">cat</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">d</span><span class="p">:</span> <span class="dl">"</span><span class="s2">dog</span><span class="dl">"</span>
+<span class="p">};</span>
+
+<span class="kd">let</span> <span class="nx">a</span><span class="o">=</span><span class="dl">"</span><span class="s2">apple</span><span class="dl">"</span><span class="p">,</span><span class="nx">b</span><span class="o">=</span><span class="dl">"</span><span class="s2">banana</span><span class="dl">"</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">dictExample</span><span class="o">=</span><span class="p">{</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="클래스와-객체">클래스와 객체</h2>
+
+<h3 id="클래스-예제1">클래스 예제1</h3>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">Car</span><span class="p">{</span>
+    <span class="kd">constructor</span><span class="p">(</span><span class="nx">wheel</span><span class="p">,</span><span class="nx">sit</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">numberOfWheels</span><span class="o">=</span><span class="nx">wheel</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">numberOfSits</span><span class="o">=</span><span class="nx">sit</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="nx">getNumberOfWheels</span><span class="p">(){</span>
+        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">numberOfWheels</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="nx">setNumberOfWheels</span><span class="p">(</span><span class="nx">num</span><span class="p">){</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">numberOfWheels</span><span class="o">=</span><span class="nx">num</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="nx">getNumberOfSits</span><span class="p">(){</span>
+        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">numberOfSits</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="nx">setNumberOfSits</span><span class="p">(</span><span class="nx">num</span><span class="p">){</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">numberOfSits</span><span class="o">=</span><span class="nx">num</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="nx">printCarInfo</span><span class="p">(){</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`바퀴수 : </span><span class="p">${</span><span class="k">this</span><span class="p">.</span><span class="nx">numberOfWheels</span><span class="p">}</span><span class="s2">, 좌석수 : </span><span class="p">${</span><span class="k">this</span><span class="p">.</span><span class="nx">numberOfSits</span><span class="p">}</span><span class="s2"> 입니다.`</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">let</span> <span class="nx">car1</span><span class="o">=</span><span class="k">new</span> <span class="nx">Car</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">);</span>
+<span class="nx">car1</span><span class="p">.</span><span class="nx">printCarInfo</span><span class="p">();</span>
+<span class="nx">car1</span><span class="p">.</span><span class="nx">setNumberOfSits</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+<span class="nx">car1</span><span class="p">.</span><span class="nx">setNumberOfWheels</span><span class="p">(</span><span class="mi">6</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">car1</span><span class="p">.</span><span class="nx">getNumberOfSits</span><span class="p">());</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">car1</span><span class="p">.</span><span class="nx">getNumberOfWheels</span><span class="p">());</span>
+</code></pre></div></div>
+
+<h3 id="클래스-예제2">클래스 예제2</h3>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">Car</span><span class="o">=</span><span class="p">{</span>
+    <span class="na">numberOfWheels</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+    <span class="na">numberOfSits</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+    <span class="na">getNumberOfWheels</span><span class="p">:</span> <span class="p">()</span><span class="o">=&gt;</span><span class="p">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">numberOfWheels</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="nl">setNumberOfWheels</span><span class="p">:</span> <span class="p">(</span><span class="nx">num</span><span class="p">)</span><span class="o">=&gt;</span><span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">numberOfWheels</span><span class="o">=</span><span class="nx">num</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="nl">getNumberOfSits</span><span class="p">:</span> <span class="p">()</span><span class="o">=&gt;</span><span class="p">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">numberOfSits</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="nl">setNumberOfSits</span><span class="p">:</span> <span class="p">(</span><span class="nx">num</span><span class="p">)</span><span class="o">=&gt;</span><span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">numberOfSits</span><span class="o">=</span><span class="nx">num</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="nl">printCarInfo</span><span class="p">:</span> <span class="p">()</span><span class="o">=&gt;</span><span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`바퀴수 : </span><span class="p">${</span><span class="k">this</span><span class="p">.</span><span class="nx">numberOfWheels</span><span class="p">}</span><span class="s2">, 좌석수 : </span><span class="p">${</span><span class="k">this</span><span class="p">.</span><span class="nx">numberOfSits</span><span class="p">}</span><span class="s2"> 입니다.`</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">let</span> <span class="nx">car1</span><span class="o">=</span><span class="k">new</span> <span class="nx">Car</span><span class="p">();</span>
+<span class="nx">car1</span><span class="p">.</span><span class="nx">printCarInfo</span><span class="p">();</span>
+<span class="nx">car1</span><span class="p">.</span><span class="nx">setNumberOfSits</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+<span class="nx">car1</span><span class="p">.</span><span class="nx">setNumberOfWheels</span><span class="p">(</span><span class="mi">6</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">car1</span><span class="p">.</span><span class="nx">getNumberOfSits</span><span class="p">());</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">car1</span><span class="p">.</span><span class="nx">getNumberOfWheels</span><span class="p">());</span>
+</code></pre></div></div>]]></content><author><name>정우빈</name></author><category term="Lecture" /><category term="JavaScript" /><summary type="html"><![CDATA[Array, Dictionary]]></summary></entry><entry><title type="html">JavaScript 강의 2일차</title><link href="http://localhost:4000/jekyll-theme-yat/lecture/2024/03/11/javascript-day2.html" rel="alternate" type="text/html" title="JavaScript 강의 2일차" /><published>2024-03-11T00:00:00+00:00</published><updated>2024-03-11T00:00:00+00:00</updated><id>http://localhost:4000/jekyll-theme-yat/lecture/2024/03/11/javascript-day2</id><content type="html" xml:base="http://localhost:4000/jekyll-theme-yat/lecture/2024/03/11/javascript-day2.html"><![CDATA[<h2 id="자료형">자료형</h2>
+
+<hr />
+
+<h3 id="javascript에서의-자료형-확인">JavaScript에서의 자료형 확인</h3>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">typesArray</span><span class="o">=</span><span class="p">[</span><span class="kc">undefined</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="nx">n</span><span class="p">,</span><span class="kc">true</span><span class="p">,</span><span class="dl">"</span><span class="s2">foo</span><span class="dl">"</span><span class="p">,</span><span class="nb">Symbol</span><span class="p">(</span><span class="dl">"</span><span class="s2">id</span><span class="dl">"</span><span class="p">),</span><span class="nb">Math</span><span class="p">,</span><span class="kc">null</span><span class="p">,</span><span class="nx">alert</span><span class="p">];</span>
+<span class="k">for</span><span class="p">(</span><span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="nx">i</span><span class="o">&lt;</span><span class="nx">typesArray</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">typesArray</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
+<span class="p">}</span>
+<span class="cm">/*
+실행결과
+"undefined"
+"number"
+"bigint"
+"boolean"
+"string"
+"symbol"
+"object"
+"object"
+"function"
+*/</span>
+</code></pre></div></div>
+
+<h3 id="javascript에서의-형변환">JavaScript에서의 형변환</h3>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">123</span><span class="dl">"</span><span class="o">+</span><span class="mi">456</span><span class="p">);</span> <span class="c1">// 456이 string으로 자동형변환 되어서 123456이 됨</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">parseInt</span><span class="p">(</span><span class="dl">"</span><span class="s2">123</span><span class="dl">"</span><span class="p">)</span><span class="o">+</span><span class="mi">456</span><span class="p">);</span> <span class="c1">// 579</span>
+</code></pre></div></div>
+<p>이 외에 여러 형변환 함수들이 있다.</p>
+<ul>
+  <li>parseFloat(x)</li>
+  <li>Number(x)</li>
+  <li>x.toString(진법)</li>
+  <li>x.toFixed(소숫점자리수) - 기본은 0자리</li>
+  <li>String(x)</li>
+</ul>
+
+<h2 id="연산">연산</h2>
+
+<hr />
+
+<h3 id="javascript에서의-숫자연산">JavaScript에서의 숫자연산</h3>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">a</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="nx">b</span><span class="o">=</span><span class="mi">2</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="o">+</span><span class="nx">b</span><span class="p">);</span> <span class="c1">//12</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="o">-</span><span class="nx">b</span><span class="p">);</span> <span class="c1">// 8</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="o">*</span><span class="nx">b</span><span class="p">);</span> <span class="c1">// 20</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="o">/</span><span class="nx">b</span><span class="p">);</span> <span class="c1">// 5</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="o">%</span><span class="nx">b</span><span class="p">);</span> <span class="c1">// 0</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="o">++</span><span class="p">);</span> <span class="c1">// 10</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span> <span class="c1">// 11</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="o">--</span><span class="nx">a</span><span class="p">);</span> <span class="c1">// 10</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span> <span class="c1">// 10</span>
+</code></pre></div></div>
+
+<h3 id="javascript에서의-문자연산">JavaScript에서의 문자연산</h3>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="p">[</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">,</span><span class="nx">c</span><span class="p">]</span><span class="o">=</span><span class="p">[</span><span class="dl">"</span><span class="s2">나는</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">정우빈</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">입니다.</span><span class="dl">"</span><span class="p">];</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="o">+</span><span class="nx">b</span><span class="o">+</span><span class="nx">c</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="javascript에서의-비트연산">JavaScript에서의 비트연산</h3>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//and연산</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="kc">true</span> <span class="o">&amp;</span> <span class="kc">true</span><span class="p">);</span><span class="c1">//1</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="kc">true</span> <span class="o">&amp;</span> <span class="kc">false</span><span class="p">);</span><span class="c1">//0</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="kc">false</span> <span class="o">&amp;</span> <span class="kc">true</span><span class="p">);</span><span class="c1">//0</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="kc">false</span> <span class="o">&amp;</span> <span class="kc">false</span><span class="p">);</span><span class="c1">//0</span>
+<span class="c1">//or연산</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="kc">true</span> <span class="o">|</span> <span class="kc">true</span><span class="p">);</span><span class="c1">//1</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="kc">true</span> <span class="o">|</span> <span class="kc">false</span><span class="p">);</span><span class="c1">//1</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="kc">false</span> <span class="o">|</span> <span class="kc">true</span><span class="p">);</span><span class="c1">//1</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="kc">false</span> <span class="o">|</span> <span class="kc">false</span><span class="p">);</span><span class="c1">//0</span>
+<span class="c1">//xor연산</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="kc">true</span> <span class="o">^</span> <span class="kc">true</span><span class="p">);</span><span class="c1">//0</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="kc">true</span> <span class="o">^</span> <span class="kc">false</span><span class="p">);</span><span class="c1">//1</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="kc">false</span> <span class="o">^</span> <span class="kc">true</span><span class="p">);</span><span class="c1">//1</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="kc">false</span> <span class="o">^</span> <span class="kc">false</span><span class="p">);</span><span class="c1">//0</span>
+<span class="c1">//기타연산</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">4</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">);</span><span class="c1">//8</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">4</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">);</span><span class="c1">//2</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="o">~</span><span class="mi">4</span><span class="p">);</span><span class="c1">//-5 ~~~ 1111 1111 1111 1011</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="o">~-</span><span class="mi">5</span><span class="p">);</span><span class="c1">//4 ~~~ 0000 0000 0000 0100</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">5</span><span class="o">&amp;</span><span class="mi">4</span><span class="p">);</span> <span class="c1">//101 &amp; 100 = 100 그러므로 4</span>
+</code></pre></div></div>
+
+<h3 id="javascript에서의-비교연산">JavaScript에서의 비교연산</h3>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">4</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">);</span><span class="c1">//True</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">4</span><span class="o">&lt;</span><span class="mi">1</span><span class="p">);</span><span class="c1">//False</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">4</span><span class="o">==</span><span class="mi">1</span><span class="p">);</span><span class="c1">//False</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">4</span><span class="o">==</span><span class="dl">'</span><span class="s1">4</span><span class="dl">'</span><span class="p">);</span><span class="c1">//True</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">4</span><span class="o">===</span><span class="mi">4</span><span class="p">);</span><span class="c1">//True</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="kc">true</span><span class="o">&amp;&amp;</span><span class="kc">false</span><span class="p">);</span><span class="c1">//false</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="kc">true</span><span class="o">||</span><span class="kc">false</span><span class="p">);</span><span class="c1">//True</span>
+</code></pre></div></div>
+<h2 id="함수">함수</h2>
+
+<hr />
+
+<h3 id="javascript에서의-함수">Javascript에서의 함수</h3>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kd">function</span> <span class="nx">함수명</span><span class="p">(</span><span class="nx">매개변수</span><span class="p">){</span>
+        <span class="nx">함수내용</span>
+    <span class="p">}</span>
+
+    <span class="kd">let</span> <span class="nx">함수명</span> <span class="o">=</span> <span class="p">(</span><span class="nx">매개변수</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">함수내용</span>
+    <span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="콜백함수">콜백함수</h3>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kd">function</span> <span class="nx">함수명</span><span class="p">(</span><span class="nx">매개변수</span><span class="p">,</span> <span class="nx">콜백함수</span><span class="p">){</span>
+        <span class="nx">함수내용</span>
+    <span class="p">}</span>
+
+    <span class="nx">함수명</span><span class="p">(</span><span class="nx">매개변수값</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">매개변수</span><span class="p">)</span> <span class="p">{</span><span class="nx">함수내용</span><span class="p">});</span>
+</code></pre></div></div>
+
+<h2 id="javascript실습">JavaScript실습</h2>
+
+<hr />
+
+<h3 id="예제-1">예제 1</h3>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!doctype html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"viewport"</span> <span class="na">content=</span><span class="s">"width=device-width, initial-scale=1"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;title&gt;</span>예제1<span class="nt">&lt;/title&gt;</span>
+  <span class="nt">&lt;/head&gt;</span>
+  <span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;table&gt;</span>
+      <span class="nt">&lt;tr</span> <span class="na">id=</span><span class="s">"name"</span><span class="nt">&gt;&lt;/tr&gt;</span>
+      <span class="nt">&lt;tr</span> <span class="na">id=</span><span class="s">"age"</span><span class="nt">&gt;&lt;/tr&gt;</span>
+    <span class="nt">&lt;/table&gt;</span>
+    <span class="nt">&lt;script&gt;</span>
+      <span class="kd">let</span> <span class="nx">nameArray</span><span class="o">=</span><span class="p">[</span><span class="dl">"</span><span class="s2">이름1</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">이름2</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">이름3</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">이름4</span><span class="dl">"</span><span class="p">];</span>
+      <span class="kd">let</span> <span class="nx">ageArray</span><span class="o">=</span><span class="p">[</span><span class="mi">11</span><span class="p">,</span><span class="mi">23</span><span class="p">,</span><span class="mi">45</span><span class="p">,</span><span class="mi">67</span><span class="p">];</span>
+      <span class="k">for</span><span class="p">(</span><span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="nx">i</span><span class="o">&lt;</span><span class="nx">nameArray</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`이름 : </span><span class="p">${</span><span class="nx">nameArray</span><span class="p">[</span><span class="nx">i</span><span class="p">]}</span><span class="s2">, 나이 : </span><span class="p">${</span><span class="nx">ageArray</span><span class="p">[</span><span class="nx">i</span><span class="p">]}</span><span class="s2">`</span><span class="p">);</span>
+        <span class="kd">let</span> <span class="nx">nameTd</span><span class="o">=</span><span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">"</span><span class="s2">td</span><span class="dl">"</span><span class="p">),</span> <span class="nx">ageTd</span><span class="o">=</span><span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">"</span><span class="s2">td</span><span class="dl">"</span><span class="p">);</span>
+        <span class="nx">nameTd</span><span class="p">.</span><span class="nx">innerHTML</span><span class="o">=</span><span class="nx">nameArray</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+        <span class="nx">ageTd</span><span class="p">.</span><span class="nx">innerHTML</span><span class="o">=</span><span class="nx">ageArray</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+        <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">name</span><span class="dl">"</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="nx">nameTd</span><span class="p">);</span>
+        <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">age</span><span class="dl">"</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="nx">ageTd</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="nt">&lt;/script&gt;</span>
+  <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+
+<h3 id="예제-2">예제 2</h3>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!doctype html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"viewport"</span> <span class="na">content=</span><span class="s">"width=device-width, initial-scale=1"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;title&gt;</span>예제1<span class="nt">&lt;/title&gt;</span>
+  <span class="nt">&lt;/head&gt;</span>
+  <span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;table&gt;</span>
+      <span class="nt">&lt;tr</span> <span class="na">id=</span><span class="s">"name"</span><span class="nt">&gt;&lt;/tr&gt;</span>
+      <span class="nt">&lt;tr</span> <span class="na">id=</span><span class="s">"age"</span><span class="nt">&gt;&lt;/tr&gt;</span>
+    <span class="nt">&lt;/table&gt;</span>    
+    <span class="nt">&lt;script&gt;</span>
+      <span class="c1">//i가 0~2까지반복</span>
+      <span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="nx">i</span><span class="o">&lt;</span><span class="mi">3</span><span class="p">;</span><span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="c1">//j가 0~2까지반복</span>
+        <span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="nx">j</span><span class="o">&lt;</span><span class="mi">3</span><span class="p">;</span><span class="nx">j</span><span class="o">++</span><span class="p">){</span>
+          <span class="c1">//콘솔에 i and j 출력</span>
+          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">i</span><span class="p">}</span><span class="s2"> and </span><span class="p">${</span><span class="nx">j</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+          <span class="c1">//j가 1이면 alert로 알림창 출력하고 break</span>
+          <span class="k">if</span><span class="p">(</span><span class="nx">j</span><span class="o">==</span><span class="mi">1</span><span class="p">){</span>        
+            <span class="nx">alert</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">i</span><span class="p">}</span><span class="s2"> and </span><span class="p">${</span><span class="nx">j</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+            <span class="k">break</span><span class="p">;</span>
+          <span class="p">}</span>
+        <span class="p">}</span><span class="c1">//break로 여기만 빠져나옴</span>
+      <span class="p">}</span>
+    <span class="nt">&lt;/script&gt;</span>
+  <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+
+<h3 id="예제-3">예제 3</h3>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!doctype html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"viewport"</span> <span class="na">content=</span><span class="s">"width=device-width, initial-scale=1"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;title&gt;</span>예제1<span class="nt">&lt;/title&gt;</span>
+  <span class="nt">&lt;/head&gt;</span>
+  <span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;table&gt;</span>
+      <span class="nt">&lt;tr</span> <span class="na">id=</span><span class="s">"name"</span><span class="nt">&gt;&lt;/tr&gt;</span>
+      <span class="nt">&lt;tr</span> <span class="na">id=</span><span class="s">"age"</span><span class="nt">&gt;&lt;/tr&gt;</span>
+    <span class="nt">&lt;/table&gt;</span>    
+    <span class="nt">&lt;script&gt;</span>
+      <span class="kd">function</span> <span class="nx">xnor</span><span class="p">(</span><span class="nx">bool1</span><span class="p">,</span><span class="nx">bool2</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">((</span><span class="nx">bool1</span><span class="o">==</span><span class="kc">true</span> <span class="o">&amp;&amp;</span> <span class="nx">bool2</span><span class="o">==</span><span class="kc">true</span><span class="p">)</span><span class="o">||</span><span class="p">(</span><span class="nx">bool1</span><span class="o">==</span><span class="kc">false</span> <span class="o">&amp;&amp;</span> <span class="nx">bool2</span><span class="o">==</span><span class="kc">false</span><span class="p">)){</span>
+            <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">else</span><span class="p">{</span>
+            <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">xnor</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">));</span> <span class="c1">//1</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">xnor</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">));</span> <span class="c1">//0</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">xnor</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">));</span> <span class="c1">//0</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">xnor</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">));</span> <span class="c1">//1</span>
+    <span class="nt">&lt;/script&gt;</span>
+  <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+<h3 id="예제-4">예제 4</h3>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!doctype html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"viewport"</span> <span class="na">content=</span><span class="s">"width=device-width, initial-scale=1"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;title&gt;</span>예제1<span class="nt">&lt;/title&gt;</span>
+  <span class="nt">&lt;/head&gt;</span>
+  <span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;table&gt;</span>
+      <span class="nt">&lt;tr</span> <span class="na">id=</span><span class="s">"name"</span><span class="nt">&gt;&lt;/tr&gt;</span>
+      <span class="nt">&lt;tr</span> <span class="na">id=</span><span class="s">"age"</span><span class="nt">&gt;&lt;/tr&gt;</span>
+    <span class="nt">&lt;/table&gt;</span>    
+    <span class="nt">&lt;script&gt;</span>
+      <span class="kd">let</span> <span class="nx">xnor</span> <span class="o">=</span> <span class="p">(</span><span class="nx">bool1</span><span class="p">,</span><span class="nx">bool2</span><span class="p">)</span><span class="o">=&gt;</span><span class="p">{</span>
+        <span class="k">if</span><span class="p">((</span><span class="nx">bool1</span><span class="o">==</span><span class="kc">true</span> <span class="o">&amp;&amp;</span> <span class="nx">bool2</span><span class="o">==</span><span class="kc">true</span><span class="p">)</span><span class="o">||</span><span class="p">(</span><span class="nx">bool1</span><span class="o">==</span><span class="kc">false</span> <span class="o">&amp;&amp;</span> <span class="nx">bool2</span><span class="o">==</span><span class="kc">false</span><span class="p">)){</span>
+            <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">else</span><span class="p">{</span>
+            <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">xnor</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">));</span> <span class="c1">//1</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">xnor</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">));</span> <span class="c1">//0</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">xnor</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">));</span> <span class="c1">//0</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">xnor</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">));</span> <span class="c1">//1</span>
+    <span class="nt">&lt;/script&gt;</span>
+  <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>]]></content><author><name>정우빈</name></author><category term="Lecture" /><category term="JavaScript" /><summary type="html"><![CDATA[자료형]]></summary></entry><entry><title type="html">JavaScript 강의 1일차</title><link href="http://localhost:4000/jekyll-theme-yat/lecture/2024/03/10/javascript-day1.html" rel="alternate" type="text/html" title="JavaScript 강의 1일차" /><published>2024-03-10T00:00:00+00:00</published><updated>2024-03-10T00:00:00+00:00</updated><id>http://localhost:4000/jekyll-theme-yat/lecture/2024/03/10/javascript-day1</id><content type="html" xml:base="http://localhost:4000/jekyll-theme-yat/lecture/2024/03/10/javascript-day1.html"><![CDATA[<h2 id="환경설정">환경설정</h2>
+
+<hr />
+
+<h3 id="node-js설치">Node Js설치</h3>
+
+<p>https://nodejs.org/ko/download/</p>
+
+<h3 id="익스프레스-설치">익스프레스 설치</h3>
+
+<p>npm i -g express-generator</p>
+
+<h3 id="프로젝트-생성">프로젝트 생성</h3>
+
+<p>express jsproject –view=pug</p>
+
+<h3 id="node_modules등-기타-파일생성">node_modules등 기타 파일생성</h3>
+
+<p>npm install</p>
+
+<h3 id="프로젝트-실행">프로젝트 실행</h3>
+
+<p>npm start</p>
+
+<p>npm start 후 브라우저 주소창 : http://localhost:3000 or http://127.0.0.1:3000</p>
+
+<h3 id="vscode-확장-설치">vscode 확장 설치</h3>
+
+<ol>
+  <li>prettier</li>
+  <li>javascript 첫번째</li>
+  <li>auto close tag</li>
+  <li>live server</li>
+</ol>
+
+<h2 id="javascript">JavaScript</h2>
+
+<hr />
+
+<h3 id="javascript란">JavaScript란?</h3>
+
+<p>특정 웹에 생동감을 불어넣어 동적인 페이지로 만들어주는 아이</p>
+
+<h3 id="javascript의-강점">JavaScript의 강점</h3>
+
+<p>html안에서 스크립트라는 키워드로 js, css등의 작업을 동시에 할 수 있다.(통합성)</p>
+
+<h3 id="javascript-엔진의-종류">JavaScript 엔진의 종류</h3>
+
+<p>크롬, 오페라 - V8<br />
+파이어폭스 - 스파이더몽키<br />
+익스플로러 - 트라이던트, 샤크라<br />
+엣지 - 샤크라코어<br />
+사파리 - 시퀴럴피쉬</p>
+
+<h3 id="javascript-엔진의-역할">JavaScript 엔진의 역할</h3>
+
+<ul>
+  <li>파싱</li>
+  <li>V8이 스크립트를 읽어들여서 기계어로 변환(컴파일)</li>
+  <li>엔진 최적화</li>
+  <li>언어종류</li>
+  <li>가비지 컬렉션</li>
+</ul>
+
+<h3 id="javascript가-브라우저에서-할-수-있는-일">JavaScript가 브라우저에서 할 수 있는 일</h3>
+
+<p>지금 배우는것은 모던 JavaScript이지만 과거의 문법이 남아있다.<br />
+(why? for 하위 호환성 유지를 위해)<br />
+예전의 JavaScript는 low level을 직접 조작하지 못해 안전한 코드였다.<br />
+Node Js가 등장하며 상황이 약간 달라졌다.</p>
+
+<ul>
+  <li>JavaScript는 웹조작, 클라이언트, 서버간의 상호작용 등을 주로 담당할 수 있다.</li>
+  <li>이벤트 조작 또한 가능하다.(ajax활용)</li>
+  <li>쿠키(브라우저) 값을 가져오거나 설정, 사용자에게 메시지 전송</li>
+</ul>
+
+<h3 id="javascript가-브라우저에서-할-수-없는-일">JavaScript가 브라우저에서 할 수 없는 일</h3>
+
+<ul>
+  <li>서버측 작업을 할 수 없었는데 Node Js로 어느정도 가능해 짐</li>
+  <li>브라우저 탭 간에 상호 독립적이기 때문에 제약이 있다.</li>
+  <li>(보안)정책상 제약이 있을 수 있다.</li>
+</ul>
+
+<p>이런 부분을 extension등으로 우회할 방법이 있긴하다.</p>
+
+<h3 id="html에-스크립트-적용법">HTML에 스크립트 적용법</h3>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;head&gt;</span>
+        <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;meta</span> <span class="na">http-equiv=</span><span class="s">"X-UA-Compatible"</span> <span class="na">content=</span><span class="s">"IE=edge"</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"viewport"</span> <span class="na">content=</span><span class="s">"width=device-width, initial-scale=1.0"</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;title&gt;</span>Hello Wrold<span class="nt">&lt;/title&gt;</span>
+        <span class="c">&lt;!-- 외부스크립트 --&gt;</span>
+        <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"padth/to/script.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+        <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://urltoscript.com"</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;/head&gt;</span>
+    <span class="nt">&lt;body&gt;</span>
+        <span class="c">&lt;!-- 내부스크립트 --&gt;</span>
+        <span class="nt">&lt;script&gt;</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">hello world! console.log</span><span class="dl">"</span><span class="p">)</span>
+            <span class="nx">alert</span><span class="p">(</span><span class="dl">"</span><span class="s2">hello world! alert</span><span class="dl">"</span><span class="p">);</span>
+        <span class="nt">&lt;/script&gt;</span>
+        <span class="nt">&lt;h1&gt;</span>hello world! h1<span class="nt">&lt;/h1&gt;</span>
+    <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+
+<h3 id="bootstrap-적용-실습">BootStrap 적용 실습</h3>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!doctype html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"viewport"</span> <span class="na">content=</span><span class="s">"width=device-width, initial-scale=1"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;title&gt;</span>Bootstrap demo<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">"https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">integrity=</span><span class="s">"sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"</span> <span class="na">crossorigin=</span><span class="s">"anonymous"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;/head&gt;</span>
+  <span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;h1&gt;</span>Hello, world!<span class="nt">&lt;/h1&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"</span> <span class="na">integrity=</span><span class="s">"sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"</span> <span class="na">crossorigin=</span><span class="s">"anonymous"</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"</span> <span class="na">integrity=</span><span class="s">"sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"</span> <span class="na">crossorigin=</span><span class="s">"anonymous"</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js"</span> <span class="na">integrity=</span><span class="s">"sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk"</span> <span class="na">crossorigin=</span><span class="s">"anonymous"</span><span class="nt">&gt;&lt;/script&gt;</span>
+  <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+
+<h2 id="javascript문법">JavaScript문법</h2>
+
+<hr />
+
+<h3 id="javascript에서의-변수선언">JavaScript에서의 변수선언</h3>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 중복선언 O, 재할당 O</span>
+<span class="kd">var</span> <span class="nx">a</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+<span class="c1">// 중복선언 X, 재할당 O</span>
+<span class="kd">let</span> <span class="nx">b</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+<span class="c1">// 중복선언 X, 재할당 X, 반드시 선언과 동시에 초기화</span>
+<span class="kd">const</span> <span class="nx">c</span><span class="o">=</span><span class="mi">3</span><span class="p">;</span>
+</code></pre></div></div>
+<ul>
+  <li><strong>호이스팅, 스코프</strong><br />
+참고 : <a href="https://www.howdy-mj.me/javascript/var-let-const/">https://www.howdy-mj.me/javascript/var-let-const/</a></li>
+</ul>
+
+<h3 id="javascript에서의-자료형">JavaScript에서의 자료형</h3>
+<ul>
+  <li>Boolean(True or False)</li>
+  <li>null(빈 값)</li>
+  <li>undefined(값을 할당하지 않은 변수)</li>
+  <li>Number(정수, 부동소수점, Infinity, NaN)</li>
+  <li>String(문자열)</li>
+</ul>
+
+<h3 id="javascript에서의-반복문">JavaScript에서의 반복문</h3>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//for문</span>
+<span class="kd">let</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="nx">n</span><span class="o">=</span><span class="mi">10</span><span class="p">;</span>
+<span class="k">for</span><span class="p">(</span><span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="nx">i</span><span class="o">&lt;</span><span class="nx">n</span><span class="p">;</span><span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="c1">//while문</span>
+<span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+<span class="k">while</span><span class="p">(</span><span class="nx">i</span><span class="o">&lt;</span><span class="nx">n</span><span class="p">){</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">i</span><span class="o">++</span><span class="p">}</span><span class="s2">번째 항목입니다.`</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="c1">//do while문</span>
+<span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+<span class="k">do</span><span class="p">{</span>    
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">i</span><span class="o">++</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="k">while</span><span class="p">(</span><span class="nx">i</span><span class="o">&lt;</span><span class="nx">n</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="javascript에서의-조건문">JavaScript에서의 조건문</h3>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">a</span><span class="o">=</span><span class="mi">3</span><span class="p">;</span>
+<span class="c1">//if문</span>
+<span class="k">if</span><span class="p">(</span><span class="nx">a</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">){</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Positive</span><span class="dl">"</span><span class="p">);</span>
+<span class="p">}</span> 
+<span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="nx">a</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">){</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Negative</span><span class="dl">"</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="k">else</span><span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Zero</span><span class="dl">"</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">//switch문</span>
+<span class="k">switch</span><span class="p">(</span><span class="nx">a</span><span class="p">){</span>   
+    <span class="k">case</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`is </span><span class="p">${</span><span class="nx">a</span><span class="p">}</span><span class="s2">`</span><span class="p">)</span> 
+    <span class="k">case</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`is </span><span class="p">${</span><span class="nx">a</span><span class="p">}</span><span class="s2">`</span><span class="p">)</span> 
+    <span class="k">case</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`is </span><span class="p">${</span><span class="nx">a</span><span class="p">}</span><span class="s2">`</span><span class="p">)</span> 
+    <span class="k">case</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`is </span><span class="p">${</span><span class="nx">a</span><span class="p">}</span><span class="s2">`</span><span class="p">)</span> 
+    <span class="k">default</span><span class="p">:</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">default</span><span class="dl">"</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="javascript에서의-주석처리">JavaScript에서의 주석처리</h3>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 이것은 한줄주석 입니다.</span>
+<span class="cm">/* 
+이것은 여러줄 주석입니다.
+한번에 여러줄을 주석처리할 수 있습니다.
+단축키는 Alt+Shift+A입니다.
+*/</span>
+</code></pre></div></div>
+
+<h3 id="use-strict">use strict</h3>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="dl">"</span><span class="s2">use strict</span><span class="dl">"</span><span class="p">;</span>
+<span class="c1">//선언없이 할당을 했으므로 에러가 남</span>
+<span class="c1">//원래는 암묵적으로 이해해주지만 use strict가 에러를 유발</span>
+<span class="nx">x</span><span class="o">=</span><span class="mf">3.14</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="javascript에서의-alert-prompt-confirm">JavaScript에서의 alert, prompt, confirm</h3>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">alert</span><span class="p">(</span><span class="dl">"</span><span class="s2">This is alert!</span><span class="dl">"</span><span class="p">)</span>
+<span class="kd">let</span> <span class="nx">inputValue</span><span class="o">=</span><span class="nx">prompt</span><span class="p">();</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">inputValue</span><span class="p">);</span><span class="c1">//입력받은값</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">inputValue</span><span class="p">);</span><span class="c1">//string</span>
+<span class="kd">let</span> <span class="nx">confirmValue</span><span class="o">=</span><span class="nx">confirm</span><span class="p">();</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">confirmValue</span><span class="p">);</span><span class="c1">//True or False</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">confirmValue</span><span class="p">);</span><span class="c1">//boolean</span>
+</code></pre></div></div>]]></content><author><name>정우빈</name></author><category term="Lecture" /><category term="JavaScript" /><summary type="html"><![CDATA[환경설정]]></summary></entry></feed>
