@@ -45,6 +45,10 @@ html[data-theme="dark"]  {
     tr:nth-child(even) {
       background-color: #080808;
     }
+    tr:nth-child(even):hover {      
+      background-color: lightgray;
+      color : black;
+    }
   }
 
   .site-header {
