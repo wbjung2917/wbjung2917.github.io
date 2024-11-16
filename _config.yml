@@ -24,7 +24,7 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: Orca Coding Factory
+title: 정우빈의 코드창고
 email: wbjung2917@gmail.com
 author: Orca
 remote_theme: "jeffreytse/jekyll-theme-yat"
